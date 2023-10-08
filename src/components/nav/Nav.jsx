@@ -1,138 +1,262 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { styled, useTheme } from "@mui/material/styles";
-import { Box, Link, Drawer } from "@mui/material";
-import userImage from "../../assets/user.png";
-import { tokens } from "../../theme";
+import React, { useEffect, useState, useRef } from "react";
+import { styled } from "@mui/material/styles";
 
 // hooks
 import useResponsive from "../../hooks/useResponsive";
 import Scrollbar from "../scrollbar/Scrollbar";
-import NavSection from "./nav-section/NavSection";
+// import NavSection from "./nav-section/NavSection";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import TouchAppOutlinedIcon from "@mui/icons-material/TouchAppOutlined";
 
-const NAV_WIDTH = 280;
+import UserInfo from "./UserInfo";
+import {
+  Box,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { ChevronRightOutlined } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import FlexBetween from "../FlexBetween";
+import profileImage from "../../assets/user.png";
+import { tokens } from "../../theme";
 
-const StyledImg = styled("img")(({ theme }) => ({
-  borderRadius: "50%",
-  marginLeft: "2em",
-  [theme.breakpoints.down("sm")]: {
-    marginLeft: "1.5em",
-  },
-}));
-
-const HomeLink = styled(Link)(() => ({
-  fontSize: 21,
-  border: "none",
-  cursor: "pointer",
-  textDecoration: "none",
-}));
-
-export default function Nav({ navConfig, openNav, onCloseNav, onOpenNav }) {
-  const { pathname } = useLocation();
-  const isDesktop = useResponsive("up", "lg");
+export default function Nav({
+  drawerWidth,
+  isSidebarOpen,
+  setIsSidebarOpen,
+  isNonMobile,
+  navConfig,
+}) {
+  const [active, setActive] = useState("");
+  const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const navRef = useRef(null);
+
   useEffect(() => {
-    if (openNav) {
-      onCloseNav();
+    const closeSidebarOnClickOutside = (event) => {
+      if (navRef.current || !navRef.current.contains(event.target)) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    if (!isNonMobile && isSidebarOpen) {
+      document.addEventListener("mousedown", closeSidebarOnClickOutside);
+    } else {
+      document.removeEventListener("mousedown", closeSidebarOnClickOutside);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+
+    return () => {
+        document.removeEventListener("mousedown", closeSidebarOnClickOutside);
+    };
+  }, [isSidebarOpen, setIsSidebarOpen]);
 
   return (
-    <Box
-      component="nav"
-      sx={{
-        flexShrink: { lg: 0 },
-        width: { lg: NAV_WIDTH },
-      }}
-    >
-      {isDesktop ? (
-        <Drawer
-          open
-          variant="permanent"
-          PaperProps={{
-            sx: {
-              width: NAV_WIDTH,
-              borderRightStyle: "dashed",
-              backgroundColor: colors.blueAccent[700], // Use theme-based background color
-              marginTop: 2,
-              marginLeft: 2,
-              borderRadius: 4,
-              height: "94%",
-            },
+    <>
+      <Box
+        component="nav"
+        sx={{
+          flexShrink: { lg: 0 },
+        }}
+        width={isNonMobile && isSidebarOpen ? drawerWidth : "0"} // Set width based on isNonMobile
+      >
+        {isNonMobile ? (
+          <Drawer
+            open={isSidebarOpen}
+            onClose={setIsSidebarOpen}
+            variant="persistent"
+            PaperProps={{
+              sx: {
+                width: drawerWidth,
+                // borderRightStyle: "dashed",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                marginTop: "70px",
+                marginLeft: 2,
+                borderRadius: 4,
+                height: "94%",
+              },
+            }}
+          >
+            <Scrollbar>
+              <Box width="100%">
+                <FlexBetween color={colors.secondary.main}>
+                  <UserInfo
+                    profileImage={profileImage}
+                    colors={colors}
+                    setIsSidebarOpen={setIsSidebarOpen}
+                    isSidebarOpen={isSidebarOpen}
+                  />
+                </FlexBetween>
+                <Divider color={colors.secondary[100]} />
+                <List>
+                  {navConfig.map(({ text, icon, to }) => {
+                    if (!icon) {
+                      return (
+                        <Typography
+                          key={text}
+                          sx={{ m: "2.25rem 0 1rem 3rem" }}
+                        >
+                          {text}
+                        </Typography>
+                      );
+                    }
+                    const lcText = to.toLowerCase();
+
+                    return (
+                      <ListItem key={text} disablePadding>
+                        <ListItemButton
+                          onClick={() => {
+                            navigate(`/${lcText}`);
+                            setActive(lcText);
+                          }}
+                          sx={{
+                            backgroundColor:
+                              active === lcText
+                                ? colors.secondary[700]
+                                : "transparent",
+                            color:
+                              active === lcText
+                                ? colors.secondary[200]
+                                : colors.secondary[100],
+                          }}
+                        >
+                          <ListItemIcon
+                            sx={{
+                              ml: "2rem",
+                              color:
+                                active === lcText
+                                  ? colors.primary[600]
+                                  : colors.secondary[200],
+                            }}
+                          >
+                            {icon}
+                          </ListItemIcon>
+                          <ListItemText primary={text} />
+                          {active === lcText && (
+                            <ChevronRightOutlined sx={{ ml: "auto" }} />
+                          )}
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </Box>
+            </Scrollbar>
+          </Drawer>
+        ) : (
+          <Drawer
+            open={isSidebarOpen}
+            onClose={setIsSidebarOpen}
+            ModalProps={{
+              keepMounted: false,
+            }}
+            PaperProps={{
+              sx: {
+                width: drawerWidth,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                marginTop: "70px",
+                marginLeft: 2,
+                borderRadius: 4,
+                height: "94%",
+              },
+            }}
+          >
+            <Scrollbar>
+              <Box width="100%">
+                <FlexBetween color={colors.secondary.main}>
+                  <UserInfo
+                    profileImage={profileImage}
+                    colors={colors}
+                    setIsSidebarOpen={setIsSidebarOpen}
+                    isSidebarOpen={isSidebarOpen}
+                  />
+                </FlexBetween>
+                <Divider color={colors.secondary[100]} />
+                <List>
+                  {navConfig.map(({ text, icon, to }) => {
+                    if (!icon) {
+                      return (
+                        <Typography
+                          key={text}
+                          sx={{ m: "2.25rem 0 1rem 3rem" }}
+                        >
+                          {text}
+                        </Typography>
+                      );
+                    }
+                    const lcText = to.toLowerCase();
+
+                    return (
+                      <ListItem key={text} disablePadding>
+                        <ListItemButton
+                          onClick={() => {
+                            navigate(`/${lcText}`);
+                            setActive(lcText);
+                          }}
+                          sx={{
+                            backgroundColor:
+                              active === lcText
+                                ? colors.secondary[700]
+                                : "transparent",
+                            color:
+                              active === lcText
+                                ? colors.secondary[200]
+                                : colors.secondary[100],
+                          }}
+                        >
+                          <ListItemIcon
+                            sx={{
+                              ml: "2rem",
+                              color:
+                                active === lcText
+                                  ? colors.primary[600]
+                                  : colors.secondary[200],
+                            }}
+                          >
+                            {icon}
+                          </ListItemIcon>
+                          <ListItemText primary={text} />
+                          {active === lcText && (
+                            <ChevronRightOutlined sx={{ ml: "auto" }} />
+                          )}
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </Box>
+            </Scrollbar>
+          </Drawer>
+        )}
+      </Box>
+      {!isNonMobile && isSidebarOpen ? (
+        <Box
+        ref={navRef}
+
+          sx={{
+            position: "absolute",
+            top: "50%",
+            right: "20%",
+            height:"100%",
+            padding: "16px", // Adjust the padding as needed
           }}
         >
-          <Scrollbar>
-            <Box
-              sx={{
-                py: 3,
-                display: "inline-flex",
-                justifyContent: "flex-end",
-                paddingRight: 2,
-              }}
-            >
-            </Box>
-            <Box sx={{ py: 3, display: "inline-flex" }}>
-              <HomeLink to="/">
-                <StyledImg
-                  src={userImage}
-                  alt="Home"
-                  sx={{
-                    width: 90,
-                    p: 1,
-                    position: "sticky",
-                    left: "1em",
-                  }}
-                />by METAKUL
-              </HomeLink> 
-            </Box>
-            <NavSection data={navConfig} />
-          </Scrollbar>
-        </Drawer>
-      ) : (
-        <Drawer
-          open={openNav}
-          onClose={onCloseNav}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          PaperProps={{
-            sx: {
-              width: NAV_WIDTH,
-              backgroundColor: theme.palette.background.default, // Use theme-based background color
-            },
-          }}
-        >
-          <Scrollbar>
-            <Box
-              sx={{
-                py: 3,
-                display: "inline-flex",
-                justifyContent: "flex-end",
-                paddingRight: 2,
-              }}
-            >
-            </Box>
-            <Box sx={{ py: 3, display: "inline-flex" }}>
-              <HomeLink to="/">
-                <StyledImg
-                  src={userImage}
-                  alt="Home"
-                  sx={{
-                    width: 70,
-                    p: 1,
-                    position: "sticky",
-                    left: "1em",
-                  }}
-                />by METAKUL
-              </HomeLink>
-            </Box>
-            <NavSection data={navConfig} />
-          </Scrollbar>
-        </Drawer>
+          <TouchAppOutlinedIcon sx={{ fontSize: "50px" }} /> {/* Add the icon here */}
+        </Box>
+      ):(
+        <Box> {/* Add the icon here */}
+      </Box>
       )}
-    </Box>
+    </>
   );
 }

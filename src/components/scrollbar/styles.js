@@ -1,29 +1,38 @@
 import SimpleBar from 'simplebar-react';
-import { alpha, styled } from '@mui/material/styles';
+import {  styled } from '@mui/material/styles';
 
+// Define your custom scrollbar styles here
+const customScrollbarStyles = {
+  /* Your custom scrollbar styles go here */
+  '&::-webkit-scrollbar': {
+    width: '20px',
+  },
+  '&::-webkit-scrollbar-track': {
+    borderRadius: '8px',
+    backgroundImage: 'url("https://i.ibb.co/5150925/tracks.png")',
+    backgroundPosition: '-5px',
+    backgroundRepeat: 'repeat-y',
+    backgroundSize: '50px',
+  },
+  '&::-webkit-scrollbar-thumb': {
+    borderRadius: '8px',
+    backgroundImage: 'url("https://i.ibb.co/q95CBdZ/train.png")',
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'repeat-y',
+    backgroundSize: '30px',
+  },
+};
+
+// Update StyledRootScrollbar with your custom styles
 export const StyledRootScrollbar = styled('div')(() => ({
-    flexGrow: 1,
-    height: '100%',
-    overflow: 'hidden',
+  flexGrow: 1,
+  height: '100%',
+  overflow: 'hidden',
+  ...customScrollbarStyles, // Merge your custom styles here
 }));
 
+// Update StyledScrollbar with your custom styles
 export const StyledScrollbar = styled(SimpleBar)(({ theme }) => ({
-    maxHeight: '100%',
-    '& .simplebar-scrollbar': {
-        '&:before': {
-            backgroundColor: alpha(theme.palette.red[600], 0.48),
-        },
-        '&.simplebar-visible:before': {
-            opacity: 1,
-        },
-    },
-    '& .simplebar-track.simplebar-vertical': {
-        width: 10,
-    },
-    '& .simplebar-track.simplebar-horizontal .simplebar-scrollbar': {
-        height: 6,
-    },
-    '& .simplebar-mask': {
-        zIndex: 'inherit',
-    },
+
+  ...customScrollbarStyles, // Merge your custom styles here
 }));

@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Topbar from "../global/Topbar";
 import navConfig from "./navConfig";
 import Nav from "../../components/nav/Nav";
-
+import {  useMediaQuery } from "@mui/material";
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
 
@@ -20,26 +20,36 @@ const Main = styled("div")(({ theme }) => ({
   overflow: "auto",
   minHeight: "100%",
   paddingTop: APP_BAR_MOBILE + 24,
-  paddingBottom: theme.spacing(10),
   [theme.breakpoints.up("lg")]: {
-    paddingTop: APP_BAR_DESKTOP + 24,
   },
 }));
 
 export default function DashboardLayout() {
-  const [open, setOpen] = useState(false);
+  
+  const isNonMobile = useMediaQuery("(min-width: 766px)");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
     <>
-      <Topbar onOpenNav={() => setOpen(true)} />
-      <StyledRoot>
+          <StyledRoot>
+
+      <Topbar
+          user={{}}
+          isSidebarOpen={isSidebarOpen}
+          isNonMobile={isNonMobile}
+          setIsSidebarOpen={setIsSidebarOpen}
+          drawerWidth="300px"
+      />
         <Nav
+          user={ {}}
+          isNonMobile={isNonMobile}
+          drawerWidth="300px"
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
           navConfig={navConfig}
-          openNav={open}
-          onCloseNav={() => setOpen(false)}
         />
         <Main>
-          <Outlet />
+          <Outlet  />
         </Main>
       </StyledRoot>
     </>

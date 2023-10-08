@@ -10,17 +10,28 @@ body,
   font-family: "AR One Sans", sans-serif;
 }
 
-::-webkit-scrollbar{
-  width:  10px;
+/* Ensure the scrollbar is always visible */
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
 }
 
-/* track */
-::-webkit-scrollbar-track{
-  background:#e0e0e0;
+html::-webkit-scrollbar {
+  width: 20px;
 }
-::-webkit-scrollbar-track:hover{
-  background:#555 ;
+      
+html::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-image: url("https://i.ibb.co/5150925/tracks.png");
+  background-position: -5px;
+  background-repeat: repeat-y;
+  background-size: 50px;
 }
-::-webkit-scrollbar-thumb{
-  background: #888;
+      
+html::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-image: url("https://i.ibb.co/q95CBdZ/train.png");
+  background-position: center center;
+  background-repeat: repeat-y;
+  background-size: 40px;
 }

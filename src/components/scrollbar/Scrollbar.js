@@ -5,7 +5,7 @@ function Scrollbar({ children, sx, ...other }) {
 
 
         return (
-            <StyledRootScrollbar sx={{  height: 'calc(100% - 20px)', // Adjust the height as needed
+            <StyledRootScrollbar sx={{  height: 'calc(100% - 20px)', 
             overflowY: 'auto', ...sx }} {...other}>
                 {children}
             </StyledRootScrollbar>
