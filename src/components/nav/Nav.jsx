@@ -66,13 +66,16 @@ export default function Nav({
         sx={{
           flexShrink: { lg: 0 },
         }}
-        width={isNonMobile && isSidebarOpen ? drawerWidth : "0"} // Set width based on isNonMobile
+        width={isNonMobile && isSidebarOpen ? `${drawerWidth}-70px`: "0"} // Set width based on isNonMobile
       >
         {isNonMobile ? (
           <Drawer
             open={isSidebarOpen}
             onClose={setIsSidebarOpen}
             variant="persistent"
+            ModalProps={{
+              keepMounted: false,
+            }}
             PaperProps={{
               sx: {
                 width: drawerWidth,
@@ -157,7 +160,7 @@ export default function Nav({
             open={isSidebarOpen}
             onClose={setIsSidebarOpen}
             ModalProps={{
-              keepMounted: false,
+              keepMounted: true,
             }}
             PaperProps={{
               sx: {
@@ -246,7 +249,7 @@ export default function Nav({
           sx={{
             position: "absolute",
             top: "50%",
-            right: "20%",
+            right: "15%",
             height:"100%",
             padding: "16px", // Adjust the padding as needed
           }}

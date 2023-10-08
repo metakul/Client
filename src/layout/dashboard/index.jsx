@@ -38,12 +38,12 @@ export default function DashboardLayout() {
           isSidebarOpen={isSidebarOpen}
           isNonMobile={isNonMobile}
           setIsSidebarOpen={setIsSidebarOpen}
-          drawerWidth="300px"
+          drawerWidth="250px"
       />
         <Nav
           user={ {}}
           isNonMobile={isNonMobile}
-          drawerWidth="300px"
+          drawerWidth="250px"
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
           navConfig={navConfig}
