@@ -1,16 +1,17 @@
 import React from 'react';
 import { Box, Typography, Container, Card, CardContent } from '@mui/material';
-import {  styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import image from "../../assets/user.png";
 import { useTheme } from '@mui/material/styles';
+
 const StyledContainer = styled(Container)(({ theme }) => {
   const customTheme = useTheme();
   return {
     marginTop: '0',
     maxWidth: '100%',
-    transition: 'width 0.3s ease-in-out, margin-left 0.3s ease-in-out', // Define transition properties
     width: '100%', // Default width
     marginLeft: '0', // Default margin-left
+    transition: 'width 0.5s ease-in-out', // Add CSS transition for width
 
     [customTheme.breakpoints.up('lg')]: {
       maxWidth: '100%',
@@ -30,11 +31,11 @@ const StyledBackground = styled(Box)(({ theme }) => ({
 }));
 
 const StyledContent = styled(Box)(({ theme }) => ({
-    background: 'rgba(0, 0, 0, 0.7)',
-    color: 'white',
-    padding:theme.spacing(10),
-    paddingBottom: theme.spacing(10), // Add padding at the bottom for space
-  }));
+  background: 'rgba(0, 0, 0, 0.7)',
+  color: 'white',
+  padding: theme.spacing(10),
+  paddingBottom: theme.spacing(10), // Add padding at the bottom for space
+}));
 
 const StyledCard = styled(Card)(({ theme }) => ({
   marginBottom: theme.spacing(3),
@@ -49,6 +50,8 @@ const StyledCardHeader = styled(Typography)(({ theme }) => ({
 }));
 
 const HomePage = () => {
+  // Add your component logic here
+
   return (
     <StyledContainer>
       <StyledBackground>
@@ -170,7 +173,6 @@ const HomePage = () => {
           </CardContent>
         </StyledCard>
 
-        {/* Rest of your content */}
         
       </StyledContent>
       </StyledBackground>
