@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { styled } from "@mui/material/styles";
-
+import { useLocation } from "react-router-dom";
 // hooks
 import useResponsive from "../../hooks/useResponsive";
 import Scrollbar from "../scrollbar/Scrollbar";
@@ -34,6 +34,7 @@ export default function Nav({
   isNonMobile,
   navConfig,
 }) {
+  const { pathname } = useLocation();
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
@@ -42,23 +43,11 @@ export default function Nav({
   const navRef = useRef(null);
 
   useEffect(() => {
-    const closeSidebarOnClickOutside = (event) => {
-      if (navRef.current || !navRef.current.contains(event.target)) {
-        setIsSidebarOpen(false);
-      }
-    };
-
-    if (!isNonMobile && isSidebarOpen) {
-      document.addEventListener("mousedown", closeSidebarOnClickOutside);
-    } else {
-      document.removeEventListener("mousedown", closeSidebarOnClickOutside);
+    if (isSidebarOpen) {
+      setIsSidebarOpen();
     }
-
-    return () => {
-        document.removeEventListener("mousedown", closeSidebarOnClickOutside);
-    };
-  }, [isSidebarOpen, setIsSidebarOpen]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
   return (
     <>
       <Box
@@ -160,7 +149,7 @@ export default function Nav({
             open={isSidebarOpen}
             onClose={setIsSidebarOpen}
             ModalProps={{
-              keepMounted: true,
+              keepMounted: false,
             }}
             PaperProps={{
               sx: {
@@ -242,24 +231,7 @@ export default function Nav({
           </Drawer>
         )}
       </Box>
-      {!isNonMobile && isSidebarOpen ? (
-        <Box
-        ref={navRef}
-
-          sx={{
-            position: "absolute",
-            top: "50%",
-            right: "15%",
-            height:"100%",
-            padding: "16px", // Adjust the padding as needed
-          }}
-        >
-          <TouchAppOutlinedIcon sx={{ fontSize: "50px" }} /> {/* Add the icon here */}
-        </Box>
-      ):(
-        <Box> {/* Add the icon here */}
-      </Box>
-      )}
+    
     </>
   );
 }
