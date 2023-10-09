@@ -3,14 +3,14 @@ import { Box, Typography, Container, Card, CardContent } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import image from "../../assets/user.png";
 import { useTheme } from '@mui/material/styles';
-
+import HeroSection from './HeroSection';
+import Info from './Info';
 const StyledContainer = styled(Container)(({ theme }) => {
   const customTheme = useTheme();
   return {
     marginTop: '0',
     maxWidth: '100%',
     width: '100%', // Default width
-    marginLeft: '0', // Default margin-left
     transition: 'width 0.5s ease-in-out', // Add CSS transition for width
 
     [customTheme.breakpoints.up('lg')]: {
@@ -22,11 +22,10 @@ const StyledContainer = styled(Container)(({ theme }) => {
 });
 
 const StyledBackground = styled(Box)(({ theme }) => ({
-  backgroundImage: `url('${image}')`,
+//   backgroundImage: `url('${image}')`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   height: '100%', // Set the height to 100% of the container
-  width: '100%',
   animation: '$rotate 10s linear infinite',
 }));
 
@@ -54,6 +53,8 @@ const HomePage = () => {
 
   return (
     <StyledContainer>
+        <HeroSection/>
+        <Info/>
       <StyledBackground>
       <StyledContent>
         <Typography variant="h4" component="h1">
@@ -62,6 +63,7 @@ const HomePage = () => {
         <Typography variant="body1">
           Meta-kul is a metaverse-based NFT project aimed at spreading awareness of blockchain WEB 3.0, NFT's, and revolutionizing the educational system. In this digital realm, students are treated equally and can nurture their special talents.
         </Typography>
+      
         <StyledCard>
           <CardContent>
             <StyledCardHeader>Upcoming Events</StyledCardHeader>
@@ -73,105 +75,7 @@ const HomePage = () => {
             </Typography>
           </CardContent>
         </StyledCard>
-        <StyledCard>
-          <CardContent>
-            <StyledCardHeader>Upcoming Events</StyledCardHeader>
-            <Typography variant="body2">
-              <strong>The Blackout Mint</strong><br />
-              1. Minting will be open for pre and public sale.<br />
-              2. Launching Staking dashboard of NFT's to earn $KULL passively.<br />
-              3. Introducing breeding of the NFT's to upgrade your current 3D NFT's.<br />
-            </Typography>
-          </CardContent>
-        </StyledCard>
-        <StyledCard>
-          <CardContent>
-            <StyledCardHeader>Upcoming Events</StyledCardHeader>
-            <Typography variant="body2">
-              <strong>The Blackout Mint</strong><br />
-              1. Minting will be open for pre and public sale.<br />
-              2. Launching Staking dashboard of NFT's to earn $KULL passively.<br />
-              3. Introducing breeding of the NFT's to upgrade your current 3D NFT's.<br />
-            </Typography>
-          </CardContent>
-        </StyledCard>
-        <StyledCard>
-          <CardContent>
-            <StyledCardHeader>Upcoming Events</StyledCardHeader>
-            <Typography variant="body2">
-              <strong>The Blackout Mint</strong><br />
-              1. Minting will be open for pre and public sale.<br />
-              2. Launching Staking dashboard of NFT's to earn $KULL passively.<br />
-              3. Introducing breeding of the NFT's to upgrade your current 3D NFT's.<br />
-            </Typography>
-          </CardContent>
-        </StyledCard>
-        <StyledCard>
-          <CardContent>
-            <StyledCardHeader>Upcoming Events</StyledCardHeader>
-            <Typography variant="body2">
-              <strong>The Blackout Mint</strong><br />
-              1. Minting will be open for pre and public sale.<br />
-              2. Launching Staking dashboard of NFT's to earn $KULL passively.<br />
-              3. Introducing breeding of the NFT's to upgrade your current 3D NFT's.<br />
-            </Typography>
-          </CardContent>
-        </StyledCard>
-        <StyledCard>
-          <CardContent>
-            <StyledCardHeader>Upcoming Events</StyledCardHeader>
-            <Typography variant="body2">
-              <strong>The Blackout Mint</strong><br />
-              1. Minting will be open for pre and public sale.<br />
-              2. Launching Staking dashboard of NFT's to earn $KULL passively.<br />
-              3. Introducing breeding of the NFT's to upgrade your current 3D NFT's.<br />
-            </Typography>
-          </CardContent>
-        </StyledCard>
-        <StyledCard>
-          <CardContent>
-            <StyledCardHeader>Upcoming Events</StyledCardHeader>
-            <Typography variant="body2">
-              <strong>The Blackout Mint</strong><br />
-              1. Minting will be open for pre and public sale.<br />
-              2. Launching Staking dashboard of NFT's to earn $KULL passively.<br />
-              3. Introducing breeding of the NFT's to upgrade your current 3D NFT's.<br />
-            </Typography>
-          </CardContent>
-        </StyledCard>
-        <StyledCard>
-          <CardContent>
-            <StyledCardHeader>Upcoming Events</StyledCardHeader>
-            <Typography variant="body2">
-              <strong>The Blackout Mint</strong><br />
-              1. Minting will be open for pre and public sale.<br />
-              2. Launching Staking dashboard of NFT's to earn $KULL passively.<br />
-              3. Introducing breeding of the NFT's to upgrade your current 3D NFT's.<br />
-            </Typography>
-          </CardContent>
-        </StyledCard>
-        <StyledCard>
-          <CardContent>
-            <StyledCardHeader>Upcoming Events</StyledCardHeader>
-            <Typography variant="body2">
-              <strong>The Blackout Mint</strong><br />
-              1. Minting will be open for pre and public sale.<br />
-              2. Launching Staking dashboard of NFT's to earn $KULL passively.<br />
-              3. Introducing breeding of the NFT's to upgrade your current 3D NFT's.<br />
-            </Typography>
-          </CardContent>
-        </StyledCard>
-        <StyledCard>
-          <CardContent>
-            <StyledCardHeader>Upcoming Events</StyledCardHeader>
-            <Typography variant="body2">
-              <strong>The Blackout Mint</strong><br />
-              1. Minting will be open for pre and public sale.<br />
-              2. Launching Staking dashboard of NFT's to earn $KULL passively.<br />
-              3. Introducing breeding of the NFT's to upgrade your current 3D NFT's.<br />
-            </Typography>
-          </CardContent>
-        </StyledCard>
+        
 
         
       </StyledContent>

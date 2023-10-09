@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400;500;600;700&family=Foldit:wght@400;500&display=swap");
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body,
 #root,
@@ -17,7 +21,7 @@ html, body {
 }
 
 html::-webkit-scrollbar {
-  width: 20px;
+  width: 10px;
 }
       
 html::-webkit-scrollbar-track {

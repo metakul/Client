@@ -55,7 +55,7 @@ export default function Nav({
         sx={{
           flexShrink: { lg: 0 },
         }}
-        width={isNonMobile && isSidebarOpen ? `${drawerWidth}-70px`: "0"} // Set width based on isNonMobile
+        marginRight={isNonMobile && isSidebarOpen ? `${drawerWidth}`: `0`} // Set width based on isNonMobile
       >
         {isNonMobile ? (
           <Drawer
@@ -71,7 +71,7 @@ export default function Nav({
                 // borderRightStyle: "dashed",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
-                marginTop: "70px",
+                marginTop: "75px",
                 marginLeft: 2,
                 borderRadius: 4,
                 height: "94%",
@@ -156,7 +156,7 @@ export default function Nav({
                 width: drawerWidth,
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
-                marginTop: "70px",
+                marginTop: "75px",
                 marginLeft: 2,
                 borderRadius: 4,
                 height: "94%",
