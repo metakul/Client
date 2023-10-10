@@ -45,7 +45,7 @@ export default function DashboardLayout() {
           isNonMobile={isNonMobile}
           drawerWidth="250px"
           isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={setIsSidebarOpen}
+          setIsSidebarOpen={() => setIsSidebarOpen(false)}
           navConfig={navConfig}
         />
         <Main>

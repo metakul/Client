@@ -130,7 +130,7 @@ const Topbar = ({
             borderRadius="9px"
             gap="1rem"
             p="0.1rem 1.5rem"
-            minWidth={"150px"}
+            minWidth={"100px"}
           >
             <InputBase placeholder="Search..." />
             <IconButton>
@@ -140,7 +140,7 @@ const Topbar = ({
         </FlexBetween>
 
         {/* RIGHT SIDE */}
-        <FlexBetween gap="1.5rem">
+        <FlexBetween sx={{ gap: isNonMobile ? "2rem" : "0.2rem" }}>
           <IconButton onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === "dark" ? (
               <DarkModeOutlined />
@@ -171,9 +171,9 @@ const Topbar = ({
               >
                 <div className="bg-yankees-blue rounded-3xl items-center  cursor-pointer w-max mr-2 sm:mr-0  ">
                   <div className="h-10 text-xs flex justify-items-end justify-end px-1 py-1 items-center">
-                    <div className=" flex pl-5 pr-6" style={{color:colors.primary[100]}}>
+                    {/* <div className=" flex pl-5 pr-6" style={{color:colors.primary[100]}}>
                       B134 ... c945
-                    </div>
+                    </div> */}
                     <div>
                       <Avatar>
                         <img src={profileImage} />
