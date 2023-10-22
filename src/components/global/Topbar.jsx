@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ColorModeContext, tokens } from "../../theme";
 import {
@@ -10,7 +11,7 @@ import {
   SettingsOutlined,
   ArrowDropDownOutlined,
 } from "@mui/icons-material";
-import FlexBetween from "../../components/FlexBetween";
+import FlexBetween from "../FlexBetween";
 import profileImage from "../../assets/user.png";
 import {
   AppBar,
@@ -33,6 +34,7 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import Person4OutlinedIcon from "@mui/icons-material/Person4Outlined";
 import Groups2TwoToneIcon from '@mui/icons-material/Groups2TwoTone';
 
+import { userLogout } from "../../utils/apiUrl/apiUrl";
 
 import RedeemTwoToneIcon from '@mui/icons-material/RedeemTwoTone';
 const StyledMenu = styled((props,colors) => (
@@ -90,6 +92,7 @@ const Topbar = ({
   drawerWidth,
 }) => {
   const theme = useTheme();
+  const navigate=useNavigate()
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
 
@@ -101,7 +104,17 @@ const Topbar = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
-  // State to track whether the user has scrolled down
+
+  const handleLogout = async () => {
+    try {
+      // Call the userLogout function from your API to log the user out on the server side
+      await userLogout();
+      window.location.reload()
+    } catch (error) {
+      console.error("Logout error:", error);
+      // Handle any errors that may occur during the logout process
+    }
+  };
 
   return (
     <AppBar
@@ -229,22 +242,15 @@ const Topbar = ({
                     <Typography>Referral</Typography>
                   </StyledMenuItem>
                 </Paper>
+
                 <Paper>
-                  <StyledMenuItem colors={colors}>
-                    <Avatar>
-                      <SettingsOutlinedIcon />
-                    </Avatar>
-                    <Typography>Referral</Typography>
-                  </StyledMenuItem>
-                </Paper>
-                <Paper>
-                  <StyledMenuItem colors={colors}>
-                    <Avatar>
-                      <LogoutOutlinedIcon />
-                    </Avatar>
-                    <Typography>Referral</Typography>
-                  </StyledMenuItem>
-                </Paper>
+          <StyledMenuItem colors={colors} onClick={handleLogout}>
+            <Avatar>
+              <LogoutOutlinedIcon />
+            </Avatar>
+            <Typography>Log Out</Typography>
+          </StyledMenuItem>
+        </Paper>
               </StyledMenu>
             </div>
           </FlexBetween>

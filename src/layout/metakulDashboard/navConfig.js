@@ -24,7 +24,7 @@ export const navConfig = [
     {
       text: "Metaverse",
       icon: null,
-      to: "Metaverse",
+      to: "NFT",
     },
     {
       text: "NFT's",

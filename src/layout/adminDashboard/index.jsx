@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 
-import Topbar from "../global/Topbar";
+import Topbar from "../../components/global/Topbar";
 import navConfig from "./navConfig";
 import Nav from "../../components/nav/Nav";
 import {  useMediaQuery } from "@mui/material";

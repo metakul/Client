@@ -1,92 +1,193 @@
-import React from 'react';
-import {Box,Grid,Button,Typography, useMediaQuery,Paper} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import hero1 from '../../assets/images/hero1.svg';
-import hero2 from '../../assets/images/hero2.svg';
-import hero3 from '../../assets/images/hero3.svg';
-import hero4 from '../../assets/images/hero4.svg';
-import hero5 from '../../assets/images/hero5.svg';
-import hero6 from '../../assets/images/hero6.svg';
-import percentage from '../../assets/images/percentage.svg';
+import React from "react";
+import {
+  Box,
+  Button,
+  Typography,
+  useMediaQuery,
+  Paper,
+  useTheme,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import hero1 from "../../assets/images/hero1.svg";
+import hero2 from "../../assets/images/hero2.svg";
+import hero3 from "../../assets/images/hero3.svg";
+import hero4 from "../../assets/images/hero4.svg";
+import hero5 from "../../assets/images/hero5.svg";
+import hero6 from "../../assets/images/hero6.svg";
+import percentage from "../../assets/images/percentage.svg";
+import { Link } from "react-router-dom";
+import { tokens } from "../../theme";
 
-const GradientPaper = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#27314B',
-  borderRadius: '8px',
-  padding: theme.spacing(2),
-  minWidth: 240,
-}));
+import useIsLoggedIn from '../../hooks/isUserLogin';
 
 const HeroSection = () => {
-    const isNonMobile = useMediaQuery("(min-width: 766px)");
+  const isLoggedIn = useIsLoggedIn();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
+  const isNonMobile = useMediaQuery("(min-width: 1200px)");
+  console.log(isLoggedIn)
+ 
   return (
     <Box
       component="div"
-      className="lg:max-h-56 bg-yankees-blue rounded-3xl block sm:flex lg:flex 2xl:flex py-8 px-8 min-h-[224px] text-gray justify-center sm:justify-between relative"
+      sx={{
+        bgcolor: colors.primary[800],
+        borderRadius: "8px",
+        padding: 2,
+        minWidth: 240,
+        py: 6,
+        px: 6,
+        minHeight: "224px",
+        justifyContent: "center",
+        display: "flex",
+        flexWrap: "wrap",
+      }}
     >
+      <Box sx={{ display: "flex" }}>
+        <Box sx={{
+          display: "block"
+        }}>
+          <img src={percentage} alt="Percentage" />
+          <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+            Gas Fee
+            <Box
+              sx={{
+                // background: "linear-gradient(to right, cyan, blue)",
+                height: "2px",
+              }}
+            ></Box>
+          </Typography>
+        </Box>
+        <Box sx={{
+          marginLeft: 6,
+          mt: 2,
+
+        }}>
+
+          <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+            VIA: METAKUL
+            <Box
+              sx={{
+                // background:
+                //   "linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2))",
+                height: "3px",
+              }}
+            ></Box>
+          </Typography>
+
+          <Typography variant="h4" sx={{ fontWeight: "bold", mt: 2 }}>
+            FOR: EDUCATIONAL METAVERSE
+          </Typography>
+        </Box>
+      </Box>
+
+
+
+
       <Box
-        className="w-60 sm:block md:block lg:block xl:block 2xl:block"
-        component="div"
+        sx={{
+          position: "relative",
+          mt: 4,
+          display: {
+            xs: "block",
+            sm: "flex",
+            md: "flex",
+            lg: "flex",
+            xl: "flex",
+            "2xl": "flex",
+          },
+          marginTop: "40px",
+        }}
       >
-        <img src={percentage} alt="Percentage" />
-
-        <Typography variant="h4" className="font-extrabold">
-          Gas Fee
-        </Typography>
-        <div className="from-cyan-500 to-blue-500"></div>
-      </Box>
-
-      <Box className="absolute top-0 left-0 w-2/3 hidden xl:flex justify-center overflow-hidden">
-        <div className="bg-image-gradient-top w-36 h-16 blur-[80px]"></div>
-      </Box>
-      <Box className="absolute bottom-0 left-0 w-full hidden xl:flex justify-center overflow-hidden">
-        <div className="bg-image-gradient-bottom w-36 h-16 blur-[80px] opacity-80"></div>
-      </Box>
-      <Box
-        className="relative xl:flex 2xl:flex sm:hidden md:hidden mt-4 sm:mt-0 md:mt-0 lg:mt-0 2xl:mt-0"
-        component="div" style={{marginTop:"40px"}}
-      >
-            {isNonMobile?(
-            <div>
-             <img src={hero1} alt="Hero1" className="relative right-2" />
-             <img src={hero2} alt="Hero2" className="absolute left-20" />
-             <img src={hero3} alt="Hero3" className="relative right-8" />
-      
+        {isNonMobile ? (
+          <Box display="flex" flexDirection="row">
+            <img
+              src={hero1}
+              alt="Hero1"
+              sx={{ position: "relative", right: "2px" }}
+            />
+            <img
+              src={hero3}
+              alt="Hero3"
+              sx={{ position: "relative", right: "8px" }}
+            />
+            <img
+              src={hero2}
+              alt="Hero2"
+              sx={{ position: "absolute", left: "10px" }}
+            />
+          </Box>
+        ) : (
+          <div>
+            <img
+              src={hero4}
+              alt="Hero4"
+              sx={{ position: "relative", right: "2px" }}
+            />
+            <img
+              src={hero5}
+              alt="Hero5"
+              sx={{ position: "relative", left: "0", top: "1px" }}
+            />
+            <img
+              src={hero6}
+              alt="Hero6"
+              sx={{ position: "relative", right: "0", top: "2px" }}
+            />
           </div>
+        )}
+        <Box
+          sx={{
+            textAlign: {
+              xs: "left",
+              sm: "center",
+              md: "center",
+              lg: "right",
+              "2xl": "right",
+            },
+            mt: { xs: 10, sm: 0, md: 10, lg: 0, "2xl": 0 },
+            display: "flex",
+            flexDirection: "column",
+            bgcolor: colors.primary[800],
+            borderRadius: "50px"
 
-        ):(
-            <div>
-            <img src={hero4} alt="Hero4" className="relative right-2" />
-            <img src={hero5} alt="Hero5" className="relative left-0 top-1" />
-            <img src={hero6} alt="Hero6" className="relative right-0 top-2" />
-          </div>
-        ) }
-               <Box
-        className="text-left sm:text-center md:text-center lg:text-right 2xl:text-right relative flex flex-col mt-10 sm:mt-0 md:mt-10 lg:mt-0 2xl:mt-0"
-        component="div"
-      >
-        <Typography variant="h6" className="font-black tracking-wide">
-          Utilize Your Eth NFTs
-        </Typography>
-        <Typography
-          variant="body2"
-          className="text-space-gray font-black tracking-wider leading-8 pt-2"
+          }}
         >
-          PLAY WITH THEM TO WIN OTHER NFTS
-        </Typography>
-        <div className="grow"></div>
-        <div className="relative">
-          <Button
-            variant="contained"
-            color="primary"
-            className="rounded-lg px-6 py-3 bottom-0 right-0"
+          <Typography variant="h6" sx={{ fontWeight: "bold", letterSpacing: "wide" }}>
+            Utilize Power Of Blockchain In METAVERSE
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              fontWeight: "bold",
+              letterSpacing: "wider",
+              lineHeight: "1.5",
+              pt: 2,
+            }}
           >
-            Learn More
+            WITH EASE OF METAKUL GASLESS PLATFORM
+          </Typography>
+          <div sx={{ flex: "1" }}></div>
+          <div>
+          {!isLoggedIn ? (
+        // Render content for not logged-in users
+        <div sx={{ position: "relative" }}>
+          <Button variant="contained" sx={{ borderRadius: "lg", px: 3, py: 2, mt: 3 }}>
+            <Link to="/authentication">REGISTER</Link>
           </Button>
         </div>
+      ) : (
+        // Render content for logged-in users
+        // You can add content specific to logged-in users here
+        <Button variant="contained" sx={{ borderRadius: "lg", px: 3, py: 2, mt: 3 }}>
+        <Link to="/nft">Claim Metaverse Land</Link>
+      </Button>
+      )}
+          </div>
+
+        </Box>
       </Box>
-      </Box>
-     
     </Box>
   );
 };

@@ -24,8 +24,8 @@ export const tokens = (mode) => ({
             500: "#27314b",
             600: "#1f273c",
             700: "#171d2d",
-            800: "#10141e",
-            900: "#080a0f"
+            800: "#27314B",
+            900: "#171d2d"
   },
 
         secondary: {
@@ -75,7 +75,7 @@ export const tokens = (mode) => ({
           900: "#e0e0e0",
         },
         primary: {
-          100: "#080a0f",
+          100: "#27314B",
           200: "#10141e",
           300: "#171d2d",
           400: "#1f273c",
@@ -200,7 +200,7 @@ export const ColorModeContext = createContext({
 });
 
 export const useMode = () => {
-  const [mode, setMode] = useState("dark");
+  const [mode, setMode] = useState("light");
 
   const colorMode = useMemo(
     () => ({

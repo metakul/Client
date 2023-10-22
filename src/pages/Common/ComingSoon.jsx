@@ -114,10 +114,17 @@ const blinkAnimation = keyframes`
   50% { opacity: 0; }
   100% { opacity: 1; }
 `;
-const PlusButtonLabel = styled(Typography)`
+const MintNftLable = styled(Typography)`
   position: absolute;
   top: 35%;
-  left: 25%;
+  left:20%;
+  font-size: 5xl;
+  animation: ${blinkAnimation} 1s ease infinite; /* Adjust the duration and properties as needed */
+`;
+const PlusButtonLabel = styled(Typography)`
+  position: absolute;
+  top: 50%;
+  left:20%;
   font-size: 5xl;
   animation: ${blinkAnimation} 1s ease infinite; /* Adjust the duration and properties as needed */
 `;
@@ -168,23 +175,25 @@ const DescriptionText2 = styled(Typography)`
 function MyComponent() {
   return (
     <CustomGrid container>
+        <Typography variant='h3'>Coming Soon</Typography>
       <Grid item xs={12}>
         <CustomImageContainer >
+               <PlusButtonContainer>
+            <MintNftLable>CLAIM YOUR</MintNftLable>
+            <PlusButtonLabel>FREE NFT +</PlusButtonLabel>
+            <CustomImage5 src={plus_button} alt="Plus Button" />
+          </PlusButtonContainer>
           <CustomImage src={winners_nft2} alt="Winner NFT" />
           <CustomImage2 src={winners_nft3} alt="Winner NFT"  />
           <CustomImage3 src={winners_nft4} alt="Winner NFT"  />
          
           <CustomImage4 src={winners_nft5} alt="Winner NFT"  />
           <CustomImage5 src={winners_nft1} alt="Winner NFT"  />
-          <PlusButtonContainer>
-            <PlusButtonLabel>MINT YOUR NFT +</PlusButtonLabel>
-            {/* <PlusButtonLabel></PlusButtonLabel> */}
-            <CustomImage5 src={plus_button} alt="Plus Button" />
-          </PlusButtonContainer>
+       
 
         </CustomImageContainer>
       </Grid>
-      <Grid item xs={12} style={{ marginTop: '10px' }}>
+      {/* <Grid item xs={12} style={{ marginTop: '10px' }}>
         <Grid item xs={12}>
 
         <HowItWorksText>What we offer</HowItWorksText>
@@ -205,7 +214,7 @@ function MyComponent() {
           virtual & web3 experience
         </DescriptionText2>
         </Grid>
-      </Grid>
+      </Grid> */}
     </CustomGrid>
   );
 }

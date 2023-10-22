@@ -1,10 +1,8 @@
 import React from 'react';
 import { Box, Typography, Container, Card, CardContent } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import image from "../../assets/user.png";
 import { useTheme } from '@mui/material/styles';
-import HeroSection from './HeroSection';
-import Info from './Info';
+
 const StyledContainer = styled(Container)(({ theme }) => {
   const customTheme = useTheme();
   return {
@@ -48,13 +46,11 @@ const StyledCardHeader = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-const HomePage = () => {
+const MintPage = () => {
   // Add your component logic here
 
   return (
     <StyledContainer>
-        <HeroSection/>
-        <Info/>
       <StyledBackground>
       <StyledContent>
         <Typography variant="h4" component="h1">
@@ -75,13 +71,10 @@ const HomePage = () => {
             </Typography>
           </CardContent>
         </StyledCard>
-        
-
-        
       </StyledContent>
       </StyledBackground>
     </StyledContainer>
   );
 };
 
-export default HomePage;
+export default MintPage;
