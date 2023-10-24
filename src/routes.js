@@ -9,6 +9,7 @@ import AuthPage from "./pages/AuthPage"
 import HomePage from "./pages/HomePage"
 import MintPage from "./pages/NftPage/mintNft"
 import ComingSoon from "./pages/Common/ComingSoon.jsx"
+import CustomMintPage from "./pages/CustomMintPage/CustomMint"
 
 export default function Router() {
 
@@ -36,7 +37,7 @@ export default function Router() {
             path: '/Transactions', 
             element:<DashboardLayout />,
             children:[
-                { path: '', element: <ComingSoon /> },
+                { path: '', element: <CustomMintPage /> },
             ]
         },
         {
