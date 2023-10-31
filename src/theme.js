@@ -5,120 +5,125 @@ import { createTheme } from "@mui/material/styles";
 export const tokens = (mode) => ({
   ...(mode === "dark"
     ? {
-        grey: {
-          100: "#e0e0e0",
-          200: "#c2c2c2",
-          300: "#a3a3a3",
-          400: "#858585",
-          500: "#666666",
-          600: "#525252",
-          700: "#3d3d3d",
-          800: "#292929",
-          900: "#141414",
-        },
-        primary: {
-            100: "#d4d6db",
-            200: "#a9adb7",
-            300: "#7d8393",
-            400: "#525a6f",
-            500: "#27314b",
-            600: "#1f273c",
-            700: "#171d2d",
-            800: "#27314B",
-            900: "#171d2d"
-  },
+      grey: {
+        100: "#e0e0e0",
+        200: "#c2c2c2",
+        300: "#a3a3a3",
+        400: "#858585",
+        500: "#666666",
+        600: "#525252",
+        700: "#3d3d3d",
+        800: "#292929",
+        900: "#141414",
+      },
+      primary: {
+        100: "#d4d6db",
+        200: "#a9adb7",
+        300: "#7d8393",
+        400: "#525a6f",
+        500: "#27314b",
+        600: "#1f273c",
+        700: "#27314B",
+        800: "#171d2d",
+        900: "#0d121e"
+      },
 
-        secondary: {
-          100: "#d6cceb",
-          200: "#ad99d6",
-          300: "#8566c2",
-          400: "#5c33ad",
-          500: "#330099",
-          600: "#29007a",
-          700: "#1f005c",
-          800: "#14003d",
-          900: "#0a001f",
-        },
-        redAccent: {
-          100: "#f8dcdb",
-          200: "#f1b9b7",
-          300: "#e99592",
-          400: "#e2726e",
-          500: "#db4f4a",
-          600: "#af3f3b",
-          700: "#832f2c",
-          800: "#58201e",
-          900: "#2c100f",
-        },
-        blueAccent: {
-          100: "#e1e2fe",
-          200: "#c3c6fd",
-          300: "#a4a9fc",
-          400: "#868dfb",
-          500: "#6870fa",
-          600: "#535ac8",
-          700: "#3e4396",
-          800: "#2a2d64",
-          900: "#151632",
-        },
-      }
+      secondary: {
+        100: "#ffffff",
+        200: "#ad99d6",
+        300: "#8566c2",
+        400: "#5c33ad",
+        500: "#330099",
+        600: "#29007a",
+        700: "#1f005c",
+        800: "#14003d",
+        900: "#0a001f",
+      },
+      yellow: {
+        100: "#ffffcc",
+        200: "#ffff99",
+        300: "#ffff66",
+        400: "#ffff33",
+        500: "#ffff00",
+        600: "#cccc00",
+        700: "#999900",
+        800: "#666600",
+        900: "#333300"
+      },
+
+
+      green: {
+        100: "#ccffcc",
+        200: "#99ff99",
+        300: "#66ff66",
+        400: "#33ff33",
+        500: "#00ff00",
+        600: "#00cc00",
+        700: "#009900",
+        800: "#006600",
+        900: "#003300"
+      },
+    }
     : {
-        grey: {
-          100: "#141414",
-          200: "#292929",
-          300: "#3d3d3d",
-          400: "#525252",
-          500: "#666666",
-          600: "#858585",
-          700: "#a3a3a3",
-          800: "#c2c2c2",
-          900: "#e0e0e0",
-        },
-        primary: {
-          100: "#27314B",
-          200: "#10141e",
-          300: "#171d2d",
-          400: "#1f273c",
-          500: "#27314b",
-          600: "#525a6f",
-          700: "#7d8393",
-          800: "#a9adb7",
-          900: "#d4d6db",
-},
-        secondary: {
-            100: "#0a001f",
-            200: "#14003d",
-            300: "#1f005c",
-            400: "#29007a",
-            500: "#330099",
-            600: "#5c33ad",
-            700: "#8566c2",
-            800: "#ad99d6",
-            900: "#d6cceb",
-        },
-        redAccent: {
-          100: "#2c100f",
-          200: "#58201e",
-          300: "#832f2c",
-          400: "#af3f3b",
-          500: "#db4f4a",
-          600: "#e2726e",
-          700: "#e99592",
-          800: "#f1b9b7",
-          900: "#f8dcdb",
-        },
-        blueAccent: {
-          100: "#151632",
-          200: "#2a2d64",
-          300: "#3e4396",
-          400: "#535ac8",
-          500: "#6870fa",
-          600: "#868dfb",
-          700: "#a4a9fc",
-          800: "#c3c6fd",
-          900: "#e1e2fe",
-        },
-      }),
+      grey: {
+        100: "#141414",
+        200: "#292929",
+        300: "#3d3d3d",
+        400: "#525252",
+        500: "#666666",
+        600: "#858585",
+        700: "#a3a3a3",
+        800: "#c2c2c2",
+        900: "#e0e0e0",
+      },
+      primary: {
+        100: "#0d121e",
+        200: "#10141e",
+        300: "#171d2d",
+        400: "#1f273c",
+        500: "#27314b",
+        600: "#525a6f",
+        700: "#7d8393",
+        800: "#a9adb7",
+        900: "#ffffff",
+      },
+      secondary: {
+        100: "#0a001f",
+        200: "#14003d",
+        300: "#1f005c",
+        400: "#29007a",
+        500: "#330099",
+        600: "#5c33ad",
+        700: "#8566c2",
+        800: "#ad99d6",
+        900: "#d6cceb",
+      },
+      yellow: {
+        100: "#333300",
+        200: "#666600",
+        300: "#999900",
+        400: "#cccc00",
+        500: "#ffff00",
+        600: "#ffff33",
+        700: "#ffff66",
+        800: "#ffff99",
+        900: "#ffffcc",
+      },
+
+      green: {
+        100: "#003300",
+        200: "#006600",
+        300: "#009900",
+        400: "#00cc00",
+        500: "#00ff00",
+        600: "#33ff33",
+        700: "#66ff66",
+        800: "#99ff99",
+        900: "#ccffcc",
+
+      }
+
+    }),
 });
 
 // mui theme settings
@@ -129,39 +134,45 @@ export const themeSettings = (mode) => {
       mode: mode,
       ...(mode === "dark"
         ? {
-            // palette values for dark mode
-            primary: {
-              main: colors.primary[500],
-            },
-            secondary: {
-              main: colors.secondary[100],
-            },
-            neutral: {
-              dark: colors.grey[700],
-              main: colors.grey[500],
-              light: colors.grey[100],
-            },
-            background: {
-              default: colors.primary[700],
-            },
+          // palette values for dark mode
+          primary: {
+            main: colors.primary[500],
+          },
+          secondary: {
+            main: colors.secondary[100],
+          },
+          neutral: {
+            dark: colors.grey[700],
+            main: colors.grey[500],
+            light: colors.grey[100],
+          },
+          background: {
+            default:"#000000",
+          },
+          colors:{
+            colors
           }
+        }
         : {
-            // palette values for light mode
-            primary: {
-              main: colors.primary[100],
-            },
-            secondary: {
-              main: colors.secondary[500],
-            },
-            neutral: {
-              dark: colors.grey[700],
-              main: colors.grey[500],
-              light: colors.grey[100],
-            },
-            background: {
-              default: "#fcfcfc",
-            },
-          }),
+          // palette values for light mode
+          primary: {
+            main: colors.primary[100],
+          },
+          secondary: {
+            main: colors.secondary[500],
+          },
+          neutral: {
+            dark: colors.grey[700],
+            main: colors.grey[500],
+            light: colors.grey[100],
+          },
+          background: {
+            default: "#fcfcfc",
+          },
+          colors:{
+            colors
+          }
+        }),
     },
     typography: {
       fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
@@ -196,11 +207,11 @@ export const themeSettings = (mode) => {
 
 // context for color mode
 export const ColorModeContext = createContext({
-  toggleColorMode: () => {},
+  toggleColorMode: () => { },
 });
 
 export const useMode = () => {
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState("dark");
 
   const colorMode = useMemo(
     () => ({

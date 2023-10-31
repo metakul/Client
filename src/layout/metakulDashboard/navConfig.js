@@ -27,29 +27,46 @@ export const navConfig = [
       to: "NFT",
     },
     {
-      text: "NFT's",
+      text: "NFT",
       icon: <ShoppingCartOutlined />,
       to: "NFT",
     },
+
     {
-      text: "Transactions",
-      icon: <ReceiptLongOutlined />,
-      to: "Transactions",
-    },
-    {
-      text: "Geography",
+      text: "KYC",
       icon: <PublicOutlined />,
-      to: "Geography",
+      to: "kyc",
     },
     {
-      text: "Vedic",
+      text: "Career",
       icon: <CalendarMonthOutlined />,
-      to: "Vedic",
+      to: "Career",
     },
     {
-      text: "Activity",
-      icon: <TrendingUpOutlined />,
-      to: "Activity",
+      text: "Marketplace",
+      icon: <ReceiptLongOutlined />,
+      to: "marketplace",
+    },
+
+    {
+      text: "Utilities",
+      icon: null,
+      to: "NFT",
+    },
+    {
+      text: "Laundry",
+      icon: <PieChartOutlined />,
+      to: "Laundry",
+    },
+    {
+      text: "NFT Staking",
+      icon: <TodayOutlined />,
+      to: "metakulNFT",
+    },
+    {
+      text: "Profile",
+      icon: <AdminPanelSettingsOutlined />,
+      to: "Profile",
     },
   ];
 

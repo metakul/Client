@@ -173,15 +173,19 @@ const HeroSection = () => {
           {!isLoggedIn ? (
         // Render content for not logged-in users
         <div sx={{ position: "relative" }}>
-          <Button variant="contained" sx={{ borderRadius: "lg", px: 3, py: 2, mt: 3 }}>
-            <Link to="/authentication">REGISTER</Link>
+          <Button sx={{ background:colors.secondary[800],  borderRadius: "lg", px: 3, py: 2, mt: 3 }}>
+            <Link style={{
+               color:colors.grey[100]
+            }} to="/login">REGISTER</Link>
           </Button>
         </div>
       ) : (
         // Render content for logged-in users
         // You can add content specific to logged-in users here
         <Button variant="contained" sx={{ borderRadius: "lg", px: 3, py: 2, mt: 3 }}>
-        <Link to="/nft">Claim Metaverse Land</Link>
+        <Link style={{
+          color:colors.grey[100]
+        }} to="/nft">Claim Metaverse Land</Link>
       </Button>
       )}
           </div>

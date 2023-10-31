@@ -24,7 +24,6 @@ import {
 import { ChevronRightOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "../FlexBetween";
-import profileImage from "../../assets/user.png";
 import { tokens } from "../../theme";
 import useIsLoggedIn from '../../hooks/isUserLogin';
 
@@ -62,7 +61,7 @@ export default function Nav({
       }}
     >
       <button
-        onClick={() => navigate("/authentication")}
+        onClick={() => navigate("/login")}
         style={{
           background: colors.primary[500],
           color: "#fff",
@@ -103,7 +102,7 @@ export default function Nav({
            marginTop: "75px",
            marginLeft: 2,
            borderRadius: 4,
-           height: "94%",
+           height: "75%",
          },
        }}
      >
@@ -111,14 +110,14 @@ export default function Nav({
          <Box width="100%">
            <FlexBetween color={colors.secondary.main}>
              <UserInfo
-               profileImage={profileImage}
+               profileImage="assets/user.png"
                colors={colors}
                setIsSidebarOpen={setIsSidebarOpen}
                isSidebarOpen={isSidebarOpen}
              />
            </FlexBetween>
            <Divider color={colors.secondary[100]} />
-       {isLoggedIn ? (
+       {/* {isLoggedIn ? ( */}
 
            <List>
              {navConfig.map(({ text, icon, to }) => {
@@ -172,9 +171,9 @@ export default function Nav({
                );
              })}
            </List>
-              ):(
+              {/* ):(
                 renderRegistrationButton()
-               )}
+               )} */}
          </Box>
     
        </Scrollbar>
@@ -194,7 +193,7 @@ export default function Nav({
               marginTop: "75px",
               marginLeft: 2,
               borderRadius: 4,
-              height: "94%",
+              height: "75%",
             },
           }}
         >
@@ -202,14 +201,14 @@ export default function Nav({
                <Box width="100%">
                  <FlexBetween color={colors.secondary.main}>
                    <UserInfo
-                     profileImage={profileImage}
+                     profileImage="assets/user.png"
                      colors={colors}
                      setIsSidebarOpen={setIsSidebarOpen}
                      isSidebarOpen={isSidebarOpen}
                    />
                  </FlexBetween>
                  <Divider color={colors.secondary[100]} />
-            {isLoggedIn ? (
+            {/* {isLoggedIn ? ( */}
 
                  <List>
                    {navConfig.map(({ text, icon, to }) => {
@@ -263,10 +262,10 @@ export default function Nav({
                      );
                    })}
                  </List>
-                   ) : (
+                   {/* ) : (
                     // User does not have a valid JWT token, display the registration button
                     renderRegistrationButton()
-                  )}
+                  )} */}
                </Box>
           
           </Scrollbar>

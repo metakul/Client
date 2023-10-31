@@ -30,13 +30,9 @@ export const userLogin = async (data) => {
   
       return response;
     } catch (error) {
-      if (error.response) {
+      console.log(error)
         // The request was made, but the server responded with an error
         throw error
-      } else {
-        // Something else happened in making the request
-        return "Server error: Unknown error";
-      }
     }
   };
 

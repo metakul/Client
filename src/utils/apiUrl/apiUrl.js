@@ -5,10 +5,10 @@ import {
 } from "./TokenUtils";
 
 //export getApi
-export * from './User/Get/getApi';    // Import and re-export User functions
+export * from './Auth/Get/getApi';    // Import and re-export User functions
 
 //export postAPi
-export * from './User/Post/postApi';    // Import and re-export User functions
+export * from './Auth/Post/postApi';    // Import and re-export User functions
 
 
 // common api's:
@@ -24,6 +24,7 @@ export const registerUser = async (data) => {
     }, {});
     return response;
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };

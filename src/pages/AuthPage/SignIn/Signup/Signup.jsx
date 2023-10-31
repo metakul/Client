@@ -65,7 +65,7 @@ const LinkContainer = styled("div")`
 `;
 
 const Input = styled(TextField)`
-  padding: 6px;
+  padding: 2px;
   border-radius: 4px;
   margin-bottom: 4px;
   width: 100%;
@@ -109,7 +109,7 @@ const RegisterUser = ({ }) => {
     <Container colors={colors}>
       <Title>Register</Title>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ position: 'relative', width: "280px"}}>
+        <div style={{ position: 'relative'}}>
           <Input
             colors={colors}
             type="email"

@@ -5,6 +5,10 @@ import jwt_decode from "jwt-decode";
 
 const baseURL = process.env.REACT_APP_BACKEND_URL;
 const authBaseURL = process.env.REACT_APP_AUTH_URL;
+const laundryBaseURL = process.env.REACT_APP_LAUNDRY_BACKEND_URL;
+const contractsBaseURL = process.env.REACT_APP_GET_CONTRACTS_BACKEND_URL;
+const ERC721BaseURL = process.env.REACT_APP_ERC721_URL;
+
 
 export const api = axios.create({
   baseURL: baseURL,
@@ -12,6 +16,15 @@ export const api = axios.create({
 
 export const authApi = axios.create({
   baseURL: authBaseURL,
+});
+export const laundryApi = axios.create({
+  baseURL: laundryBaseURL,
+});
+export const contractFetchAPI = axios.create({
+  baseURL: contractsBaseURL,
+});
+export const ERC721API = axios.create({
+  baseURL: ERC721BaseURL,
 });
 // Function to set access token in a secure HTTP-only cookie
 export const setAccessTokenInCookie = (accessToken) => {
@@ -25,7 +38,7 @@ export const setAccessTokenInCookie = (accessToken) => {
 
 // Function to retrieve access token from cookies
 export const getAccessTokenFromCookie = async () => {
-
+  console.log(laundryBaseURL)
   let accessToken = Cookies.get('accessToken');
 
   if (accessToken) {

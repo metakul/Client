@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "js-cookie"; // Import the js-cookie library
+import jwt_decode from "jwt-decode";
+import copy from "clipboard-copy"; // Import the clipboard-copy library to copy text to the clipboard
+import toast from "react-hot-toast";
 import { ColorModeContext, tokens } from "../../theme";
 import {
   LightModeOutlined,
@@ -12,7 +15,6 @@ import {
   ArrowDropDownOutlined,
 } from "@mui/icons-material";
 import FlexBetween from "../FlexBetween";
-import profileImage from "../../assets/user.png";
 import {
   AppBar,
   Button,
@@ -33,11 +35,13 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import Person4OutlinedIcon from "@mui/icons-material/Person4Outlined";
 import Groups2TwoToneIcon from '@mui/icons-material/Groups2TwoTone';
+import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 
-import { userLogout } from "../../utils/apiUrl/apiUrl";
+import { userLogout} from "../../utils/apiUrl/apiUrl";
 
 import RedeemTwoToneIcon from '@mui/icons-material/RedeemTwoTone';
-const StyledMenu = styled((props,colors) => (
+
+const StyledMenu = styled((props, colors) => (
   <Menu
     elevation={0}
     anchorOrigin={{
@@ -92,9 +96,17 @@ const Topbar = ({
   drawerWidth,
 }) => {
   const theme = useTheme();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const [smartWalletAddress, setSmartWalletAddress] = useState(null);
+  const [isIconClicked, setIsIconClicked] = useState(false); // Define isIconClicked state here
+
+  const iconClickedStyle = {
+    transform: isIconClicked ? 'scale(0.8)' : 'scale(1)',
+    transition: 'transform 0.3s',
+    ml:2
+  };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -105,13 +117,57 @@ const Topbar = ({
     setAnchorEl(null);
   };
 
+  useEffect(() => {
+    setSmartWalletAddress("0x6975be450864c02b4613023c2152ee0743572325");
+    const accessToken = Cookies.get("accessToken"); // Get the accessToken from cookies
+    if (accessToken) {
+      // Decode the JWT token to retrieve the smartWalletAddress
+      try {
+        const decodedToken = jwt_decode.decode(accessToken);
+        if (decodedToken) {
+          const smartWalletAddress = decodedToken.smartWalletAddress;
+          setSmartWalletAddress(smartWalletAddress);
+        }
+      } catch (error) {
+        console.error("Error decoding accessToken:", error);
+      }
+    }
+  }, []);
+
+  const handleCopySmartWalletAddress = () => {
+    if (smartWalletAddress) {
+      setIsIconClicked(true);
+      copy(smartWalletAddress)
+        .then(() => {
+          toast.success("Copied");
+        })
+        .catch((error) => {
+          console.error("Error copying address:", error);
+          toast.error("Copy failed");
+        });
+      // Reset the animation after a brief delay
+      setTimeout(() => {
+        setIsIconClicked(false);
+      }, 200); // Adjust the delay as needed to match your transition duration
+    }
+  };
+
+  const handleOpenWallet = () => {
+    // Use the `navigate` function to go to the new "Winnings" page
+    navigate("/wallet"); // Replace "/winnings" with the actual route to your "Winnings" page
+  };
+  const handleOpenProfile = () => {
+    // Use the `navigate` function to go to the new "Winnings" page
+    navigate("/profile"); // Replace "/winnings" with the actual route to your "Winnings" page
+  };
+
   const handleLogout = async () => {
     try {
       // Call the userLogout function from your API to log the user out on the server side
       await userLogout();
-      window.location.reload()
+      window.location.reload();
+      navigate("/");
     } catch (error) {
-      console.error("Logout error:", error);
       // Handle any errors that may occur during the logout process
     }
   };
@@ -189,75 +245,96 @@ const Topbar = ({
                     </div> */}
                     <div>
                       <Avatar>
-                        <img src={profileImage} />
-                      </Avatar>
-                    </div>
+                        <img src="assets/user.png" />
+                    </Avatar>
                   </div>
                 </div>
-              </Button>
+              </div>
+            </Button>
 
-              <StyledMenu
-                id="demo-customized-menu"
-                MenuListProps={{
-                  "aria-labelledby": "demo-customized-button",
+            <StyledMenu
+              id="demo-customized-menu"
+              MenuListProps={{
+                "aria-labelledby": "demo-customized-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              colors={colors}
+            >
+              <div className="text-gray font-black text-sm tracking-wide pb-9">
+                Hi Rabbit !
+              </div>
+              {/* {smartWalletAddress && ( */}
+              <Typography
+                sx={{
+                  position: "relative",
+                  left: "10%",
+                  display: "flex",
+                  alignItems: "center",
                 }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                colors={colors}
+                variant="body2"
+                color="textSecondary"
               >
-                <div className="text-gray font-black text-sm tracking-wide pb-9">
-                  Hi Rabbit!
-                </div>
-                {/* <Menus onClick={handleClose} disableRipple
-                    sx={{
-                        '&:hover': {
-                            background: "#1C2438",
-                        },
-                    }}>
-                    <EditIcon />
-                    Edit
-                </Menus> */}
-                <Paper>
-                  <StyledMenuItem colors={colors}>
-                    <Avatar>
-                      <Person4OutlinedIcon />
-                    </Avatar>
-                    <Typography>Profile</Typography>
-                  </StyledMenuItem>
-                </Paper>
-                <Paper>
-                  <StyledMenuItem colors={colors}>
-                    <Avatar>
-                        <RedeemTwoToneIcon/>
-                    </Avatar>
-                    <Typography>Winnings</Typography>
-                  </StyledMenuItem>
-                </Paper>
-                <Paper>
-                  <StyledMenuItem colors={colors}>
-                    <Avatar>
-                        <Groups2TwoToneIcon/>
-                    </Avatar>
-                    <Typography>Referral</Typography>
-                  </StyledMenuItem>
-                </Paper>
+                B134 ... c945
+                  <ContentCopyOutlinedIcon
+                    onClick={handleCopySmartWalletAddress}
+                    sx={iconClickedStyle}
+                  />
+              </Typography>
+              {/* )} */}
 
-                <Paper>
-          <StyledMenuItem colors={colors} onClick={handleLogout}>
-            <Avatar>
-              <LogoutOutlinedIcon />
-            </Avatar>
-            <Typography>Log Out</Typography>
-          </StyledMenuItem>
-        </Paper>
-              </StyledMenu>
-            </div>
-          </FlexBetween>
+              {/* <Menus onClick={handleClose} disableRipple
+                  sx={{
+                      '&:hover': {
+                          background: "#1C2438",
+                      },
+                  }}>
+                  <EditIcon />
+                  Edit
+              </Menus> */}
+              <Paper>
+                <StyledMenuItem colors={colors}>
+                  <Avatar>
+                    <Person4OutlinedIcon />
+                  </Avatar>
+                  <Typography onClick={handleOpenProfile}>Profile</Typography>
+                </StyledMenuItem>
+              </Paper>
+              <Paper>
+
+                <StyledMenuItem colors={colors}>
+                  <Avatar>
+                    <RedeemTwoToneIcon />
+                  </Avatar>
+                  <Typography onClick={handleOpenWallet}>My Wallet</Typography>
+                </StyledMenuItem>
+
+              </Paper>
+              <Paper>
+                <StyledMenuItem colors={colors}>
+                  <Avatar>
+                    <Groups2TwoToneIcon />
+                  </Avatar>
+                  <Typography>Referral</Typography>
+                </StyledMenuItem>
+              </Paper>
+
+              <Paper>
+                <StyledMenuItem colors={colors} onClick={handleLogout}>
+                  <Avatar>
+                    <LogoutOutlinedIcon />
+                  </Avatar>
+                  <Typography>Log Out</Typography>
+                </StyledMenuItem>
+              </Paper>
+            </StyledMenu>
+          </div>
         </FlexBetween>
-      </Toolbar>
-    </AppBar>
-  );
+      </FlexBetween>
+    </Toolbar>
+  </AppBar>
+);
 };
 
 export default Topbar;

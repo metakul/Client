@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Typography, Container, Card, CardContent } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import image from "../../assets/user.png";
 import { useTheme } from '@mui/material/styles';
 import HeroSection from './HeroSection';
 import Info from './Info';
+
 
 const StyledContainer = styled(Container)(({ theme }) => {
   const customTheme = useTheme();

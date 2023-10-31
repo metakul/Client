@@ -58,7 +58,7 @@ const ConnectButton = styled(ButtonBase)`
 `;
 
 const Input = styled(TextField)`
-  padding: 6px;
+  padding: 2px;
   border-radius: 4px;
   margin-bottom: 4px;
   width: 100%;
@@ -119,7 +119,7 @@ const SignIn = ({ setShowSignIn }) => {
 
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ position: 'relative', width: "280px"}}>
+        <div style={{ position: 'relative'}}>
         <Input
             colors={colors}
             type="email"
@@ -151,7 +151,7 @@ const SignIn = ({ setShowSignIn }) => {
       <div style={{ paddingBlock: 8 }}>
         <span>OR</span>
       </div>
-      <Box display="flex" flexDirection="row">
+      <Box display="flex" flexDirection="column">
   <GoogleSignInButton colors={colors} onClick={handleWalletConnect}>
     <Icon>
       <GoogleIcon />
