@@ -8,7 +8,6 @@ import ProductSort from './Products/product-sort';
 import ProductFilters from './Products/product-filters';
 import ProductCartWidget from './Products/product-cart-widget';
 import Backdrop from '@mui/material/Backdrop'; // Import Backdrop component
-import CircularProgress from '@mui/material/CircularProgress'; // Import CircularProgress component
 
 // Import your fetchNFTs function from the previous code
 import { fetchNFTs } from '../../_mock/products';

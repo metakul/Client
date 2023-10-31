@@ -102,7 +102,7 @@ export default function Nav({
            marginTop: "75px",
            marginLeft: 2,
            borderRadius: 4,
-           height: "75%",
+           height: "85%",
          },
        }}
      >
@@ -193,7 +193,7 @@ export default function Nav({
               marginTop: "75px",
               marginLeft: 2,
               borderRadius: 4,
-              height: "75%",
+              height: "85%",
             },
           }}
         >

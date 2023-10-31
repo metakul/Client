@@ -8,6 +8,7 @@ import {
   CardContent,
   CardMedia,
   Button,
+  Backdrop
 } from '@mui/material';
 import { FetchMynfts } from '../../utils/apiUrl/contracts/Get/getApi';
 import TransferNFTDialog from './TransferNft';
@@ -54,16 +55,9 @@ const Page = () => {
   return (
     <>
       {loading ? (
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100vh',
-          }}
-        >
-          <img src={loadingGif} alt="Loading..." />
-        </Box>
+        <Backdrop open={true} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: '#fff' }}>
+        <img src={loadingGif} alt="Loading..." />
+     </Backdrop>
       ) : (
         <Box
           component="main"
@@ -110,7 +104,7 @@ const Page = () => {
                           variant="contained"
                           color="primary"
                           fullWidth
-                          onClick={() => handleViewOnOpenSea(nft.metadata.external_url)}
+                          onClick={() => handleViewOnOpenSea(`https://opensea.io/assets/matic/0x710e9161e8a768c0605335ab632361839f761374/${nft.metadata.id}`)}
                         >
                           View on OpenSea
                         </Button>

@@ -36,7 +36,7 @@ export const FetchMynfts = async () => {
         //${decodedToken.smartWalletAddress}
 
         // Send a request to the server to logout the user
-        const response = await contractFetchAPI.get(`/getNFTsForWalle/`);
+        const response = await contractFetchAPI.get(`/getNFTsForWallet`);
         console.log(response)
 
         return response
