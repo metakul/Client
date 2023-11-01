@@ -17,7 +17,10 @@ const CustomGrid = styled(Grid)`
 `;
 
 const CustomImageContainer = styled(Box)`
-
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 
@@ -167,10 +170,11 @@ const DescriptionText2 = styled(Typography)`
 
 function MyComponent() {
   return (
+    <>
     <CustomGrid container>
-      <Grid item xs={12}>
-        <CustomImageContainer >
-          <CustomImage src={winners_nft2} alt="Winner NFT" />
+    <Grid item xs={12}>
+      <CustomImageContainer>
+      <CustomImage src={winners_nft2} alt="Winner NFT" />
           <CustomImage2 src={winners_nft3} alt="Winner NFT"  />
           <CustomImage3 src={winners_nft4} alt="Winner NFT"  />
          
@@ -181,33 +185,33 @@ function MyComponent() {
             {/* <PlusButtonLabel></PlusButtonLabel> */}
             <CustomImage5 src={plus_button} alt="Plus Button" />
           </PlusButtonContainer>
+      </CustomImageContainer>
+    </Grid>
+  
+  </CustomGrid>
+    <Box item xs={12} style={{ marginTop: '10px' }}>
+    <Grid item xs={12}>
+      <HowItWorksText>What we offer</HowItWorksText>
+      <DescriptionText>
+        7777 Metaverse land, 777 NFTs, and unlimited
+      </DescriptionText>
+      <DescriptionText2 variant="h4">
+        virtual & web3 experience
+      </DescriptionText2>
+    </Grid>
+    <Grid item xs={12}>
+      <HowItWorksText>What we offer</HowItWorksText>
+      <DescriptionText>
+        7777 Metaverse land, 777 NFTs, and unlimited
+      </DescriptionText>
+      <DescriptionText2 variant="h4">
+        virtual & web3 experience
+      </DescriptionText2>
+    </Grid>
+  </Box>
+  </>
 
-        </CustomImageContainer>
-      </Grid>
-      <Grid item xs={12} style={{ marginTop: '10px' }}>
-        <Grid item xs={12}>
-
-        <HowItWorksText>What we offer</HowItWorksText>
-        <DescriptionText>
-          7777 Metaverse land, 777 NFTs, and unlimited
-        </DescriptionText>
-        <DescriptionText2 variant="h4">
-          virtual & web3 experience
-        </DescriptionText2>
-        </Grid>
-        <Grid item xs={12}>
-
-        <HowItWorksText>What we offer</HowItWorksText>
-        <DescriptionText>
-          7777 Metaverse land, 777 NFTs, and unlimited
-        </DescriptionText>
-        <DescriptionText2 variant="h4">
-          virtual & web3 experience
-        </DescriptionText2>
-        </Grid>
-      </Grid>
-    </CustomGrid>
-  );
+);
 }
 
 export default MyComponent;

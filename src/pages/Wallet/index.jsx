@@ -37,13 +37,14 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
     textTransform: 'none',
     fontWeight: theme.typography.fontWeightRegular,
     fontSize: theme.typography.pxToRem(15),
-    marginRight: theme.spacing(1),
+    marginRight: "0",
     // '&.Mui-selected': {
     //   color: '#000',
     // },
     '&.Mui-focusVisible': {
       backgroundColor: 'rgba(100, 95, 228, 0.32)',
     },
+    padding:0
   }),
 );
 
@@ -58,24 +59,24 @@ const CustomizedTabs = () => {
   return (
     <Container
     sx={{
+      margin:"4px",
       marginRight: "auto",
       marginLeft: "auto",
       width: "100%",
       border: `2px solid ${theme.palette.colors.colors.grey[100]}`,
       borderRadius: "24px",
       boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Adding a box shadow
-      padding: "16px", // Additional custom CSS for padding
+      padding: "8px", // Additional custom CSS for padding
     }}
   >
 
   
-      <Box sx={{ margin: 4, display:"flex", justifyContent:"center" }}>
-        <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
+      <Box sx={{ margin: 2, display:"flex", justifyContent:"center" }}>
+        <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs">
           <StyledTab label="NFTs" />
           <StyledTab label="Crypto" />
           <StyledTab label="Activity" />
         </StyledTabs>
-        <Box sx={{ p: 3 }} />
       </Box>
       {value === 0 && <MyNFT />}
       {value === 1 && <MyCrypto />}

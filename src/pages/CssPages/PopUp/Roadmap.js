@@ -1,10 +1,14 @@
+import { useTheme } from "@emotion/react";
+import { Button } from "@mui/material";
+
 
 export const Roadmap = ({ onClose }) => {
+    const theme=useTheme()
   return (
     <div className="roadmap-container">
-      <button className="close-button" onClick={onClose}>
-        close
-      </button>
+      <Button sx={{ position: 'absolute', top: 40, right: 40,color:theme.palette.colors.colors.yellow[200] }} onClick={onClose}>
+        Close
+      </Button>
       <section
         className="roadmap roadmap--style2 padding-bottom"
         id="roadmap"

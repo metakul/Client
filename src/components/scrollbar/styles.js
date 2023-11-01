@@ -5,7 +5,7 @@ import {  styled } from '@mui/material/styles';
 const customScrollbarStyles = {
   /* Your custom scrollbar styles go here */
   '&::-webkit-scrollbar': {
-    width: '20px',
+    width: '16px',
   },
   '&::-webkit-scrollbar-track': {
     borderRadius: '8px',

@@ -91,7 +91,7 @@ export const Career = () => {
                         <Paper elevation={3}>
                             <Box p={3}>
                                 <SatelliteAltOutlinedIcon fontSize="large" />
-                                <Typography variant="h6">Digital Marketer</Typography>
+                                <Typography variant="h6">Frontend Developer</Typography>
                                 <Typography variant="body2">2 positions available</Typography>
                             </Box>
                         </Paper>
@@ -101,7 +101,7 @@ export const Career = () => {
                             <Box p={3}>
                                 <Groups3OutlinedIcon fontSize="large" />
                                 <Typography variant="h6">Collab Manager</Typography>
-                                <Typography variant="body2">4 positions available</Typography>
+                                <Typography variant="body2">2 positions available</Typography>
                             </Box>
                         </Paper>
                     </Grid>
@@ -109,7 +109,7 @@ export const Career = () => {
                         <Paper elevation={3}>
                             <Box p={3}>
                                 <DeveloperModeOutlinedIcon fontSize="large" />
-                                <Typography variant="h6">Junior Blockchain Developer</Typography>
+                                <Typography variant="h6">Blockchain Developer</Typography>
                                 <Typography variant="body2">1 position available</Typography>
                             </Box>
                         </Paper>

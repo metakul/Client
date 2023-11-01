@@ -493,7 +493,7 @@ a {
   cursor: pointer;
 }
 .roadmap-container {
-  max-height: 700px; /* Set your desired maximum height */
+  max-height: 500px; /* Set your desired maximum height */
   overflow-y: auto;
   /* Add other styles if needed */
 }
@@ -674,7 +674,6 @@ ol {
 
 /*================***Mutlipage  Header Section Start Here     ***===================*/
 .header-section {
-  background: #030b21;
   z-index: 999;
   position: absolute;
 }
@@ -696,7 +695,6 @@ ol {
     z-index: 999;
   }
   .header-section.header--fixed .header-bottom {
-    background: #1d253b;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
@@ -781,7 +779,6 @@ ol {
     -moz-transition: all ease 0.3s;
     transition: all ease 0.3s;
     z-index: 9;
-    background: #1d253b;
     width: 220px;
     padding: 0;
     -webkit-transform: translateY(35px);
@@ -808,9 +805,7 @@ ol {
     background: #00ffa3;
     padding-left: 22px;
   }
-  .menu li .submenu li a:hover:after, .menu li .submenu li a:hover:before, .menu li .submenu li a.active:after, .menu li .submenu li a.active:before {
-    background: #000000;
-  }
+ 
   .menu li .submenu li:last-child a {
     border-bottom: none;
   }
@@ -1010,12 +1005,7 @@ ol {
 
 /*================*** Multipage Header Section End Here     ***===================*/
 /*============= wallet modal start=============*/
-.wallet-modal {
-  background-color: rgba(3, 11, 33, 0.8);
-}
-.wallet-modal .modal-content {
-  background-color: #1d253b;
-}
+
 .wallet-modal .modal-header {
   border-bottom: 1px solid rgba(0, 255, 163, 0.3);
 }
@@ -1323,7 +1313,6 @@ ol {
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px;
-  background-color: #030b21;
   color: #fff;
   padding: 20px 30px;
 }
@@ -2693,9 +2682,7 @@ ol {
     margin-top: -70px;
   }
 }
-.roadmap__item {
-  background-color: #000000;
-}
+
 .roadmap__item .svg-shape svg {
   top: 0;
   right: 0;
@@ -2770,7 +2757,6 @@ ol {
   background-position: center;
 }
 .team__item {
-  background-color: #000000;
 }
 .team__item .svg-shape svg {
   top: 0;

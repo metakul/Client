@@ -13,7 +13,8 @@ const StyledContainer = styled(Container)(({ theme }) => {
     maxWidth: '100%',
     width: '100%', // Default width
     transition: 'width 0.5s ease-in-out', // Add CSS transition for width
-
+    display:"flex",
+    flexDirection:"column",
     [customTheme.breakpoints.up('lg')]: {
       maxWidth: '100%',
       width: '100%',

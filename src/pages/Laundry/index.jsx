@@ -118,7 +118,7 @@ export default function BasicEditingGrid() {
                 mr: 1,
               }}
             />
-            <Typography               color={theme.palette.colors.colors.primary[100]}         >
+            <Typography color={theme.palette.colors.colors.primary[100]}         >
             Add Order
 
             </Typography>

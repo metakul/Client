@@ -25,18 +25,16 @@ export const GetAlllNfts = async (data) => {
 };
 export const FetchMynfts = async () => {
     try {
-        // const accessToken = await getAccessTokenFromCookie(); // Retrieve access token
-        // console.log(accessToken)
-        // let decodedToken
-        // if (accessToken) {
-        //    decodedToken = jwt_decode(accessToken);
-        // }
-        // console.log(decodedToken)
-
-        //${decodedToken.smartWalletAddress}
+        const accessToken = await getAccessTokenFromCookie(); // Retrieve access token
+        console.log(accessToken)
+        let decodedToken
+        if (accessToken) {
+           decodedToken = jwt_decode(accessToken);
+        }
+        console.log(decodedToken)
 
         // Send a request to the server to logout the user
-        const response = await contractFetchAPI.get(`/getNFTsForWallet`);
+        const response = await contractFetchAPI.get(`/getNFTsForWallet/${decodedToken.smartWalletAddress}`);
         console.log(response)
 
         return response
