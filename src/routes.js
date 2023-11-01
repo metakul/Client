@@ -16,6 +16,8 @@ import Profile from "./pages/Profile"
 import ProductsView from './pages/ProductShopping';
 import Register from './pages/AuthPage/Register';
 import Wallet from "./pages/Wallet"
+import CreateOrder from "./pages/CreateOrder"
+
 export default function Router() {
 
     const routes = useRoutes([
@@ -55,6 +57,13 @@ export default function Router() {
             element:<DashboardLayout />,
             children:[
                 { path: '', element: <KycPage /> },
+            ]
+        },
+        {
+            path: '/createOrder', 
+            element:<DashboardLayout />,
+            children:[
+                { path: '', element: <CreateOrder /> },
             ]
         },
 

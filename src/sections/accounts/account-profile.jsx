@@ -10,7 +10,7 @@ import {
   } from '@mui/material';
   
   const user = {
-    avatar: '/assets/avatars/avatar-anika-visser.png',
+    avatar: '/assets/images/dp.gif',
     city: 'Los Angeles',
     country: 'USA',
     jobTitle: 'Senior Developer',

@@ -29,8 +29,10 @@ export default function ShopProductCard({ product }) {
   );
 
   return (
-    <Card>
-      <Box sx={{ pt: '100%', position: 'relative' }}>
+    <Card sx={{
+      maxWidth:"280px"
+    }}>
+      <Box sx={{ pt: '100%', position: 'relative', }}>
         {renderImg}
       </Box>
 

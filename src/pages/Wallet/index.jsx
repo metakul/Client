@@ -1,139 +1,97 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Backdrop
-} from '@mui/material';
-import { FetchMynfts } from '../../utils/apiUrl/contracts/Get/getApi';
-import TransferNFTDialog from './TransferNft';
-import loadingGif from '../../assets/gif/loading_24.gif'; // Import the loading GIF
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
-const Page = () => {
-  const [nfts, setNFTs] = useState([]);
-  const [isTransferDialogOpen, setTransferDialogOpen] = useState(false);
-  const [loading, setLoading] = useState(true); // Add a loading state
 
-  useEffect(() => {
-    const fetchNFTs = async () => {
-      try {
-        const response = await FetchMynfts();
-        console.log('NFTs:', response);
-        setNFTs(response.data);
-        setLoading(false); // Set loading to false when data is fetched
-      } catch (error) {
-        console.error('Error fetching NFTs:', error);
-        setLoading(false); // Set loading to false in case of an error
-      }
-    };
 
-    fetchNFTs();
-  }, []);
+// Import the MyCrypto and MyActivity components
+import MyNFT from './MyNFT';
+import MyCrypto from './MyCrypto';
+import MyActivity from './MyActivity';
+import { useTheme } from '@mui/material/styles';
 
-  const handleViewOnOpenSea = (externalUrl) => {
-    window.open(externalUrl, '_blank');
-  };
 
-  const handleOpenTransferDialog = () => {
-    setTransferDialogOpen(true);
-  };
+const StyledTabs = styled((props) => (
+  <Tabs
+    {...props}
+    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+  />
+))({
+  '& .MuiTabs-indicator': {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  '& .MuiTabs-indicatorSpan': {
+    maxWidth: 40,
+    width: '100%',
+    backgroundColor: '#635ee7',
+  },
+});
 
-  const handleCloseTransferDialog = () => {
-    setTransferDialogOpen(false);
-  };
+const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
+  ({ theme }) => ({
+    textTransform: 'none',
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: theme.typography.pxToRem(15),
+    marginRight: theme.spacing(1),
+    // '&.Mui-selected': {
+    //   color: '#000',
+    // },
+    '&.Mui-focusVisible': {
+      backgroundColor: 'rgba(100, 95, 228, 0.32)',
+    },
+  }),
+);
 
-  const handleTransferNFT = (recipientAddress, password) => {
-    console.log('Transfer NFT to:', recipientAddress);
-    console.log('Password:', password);
+const CustomizedTabs = () => {
+  const theme=useTheme()
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
-    <>
-      {loading ? (
-        <Backdrop open={true} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: '#fff' }}>
-        <img src={loadingGif} alt="Loading..." />
-     </Backdrop>
-      ) : (
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            py: 8,
-          }}
-        >
-          <Container maxWidth="lg">
-            <Typography variant="h4" gutterBottom>
-              My NFTs
-            </Typography>
-            <Grid container spacing={3}>
-              {nfts.map((nft, index) => (
-                <Grid item xs={12} sm={6} md={4} key={index}>
-                  <Card
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      padding: 2,
-                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                      border: '1px solid #e0e0e0',
-                      transition: 'transform 0.2s',
-                      '&:hover': {
-                        transform: 'scale(1.05)',
-                      },
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={nft.metadata.image}
-                      alt={nft.metadata.name}
-                      sx={{
-                        objectFit: 'contain',
-                      }}
-                    />
-                    <CardContent>
-                      <Typography variant="h6">{nft.metadata.name}</Typography>
-                      <Typography variant="body2">{nft.metadata.description}</Typography>
-                      <Box sx={{ mt: 2 }}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          fullWidth
-                          onClick={() => handleViewOnOpenSea(`https://opensea.io/assets/matic/0x710e9161e8a768c0605335ab632361839f761374/${nft.metadata.id}`)}
-                        >
-                          View on OpenSea
-                        </Button>
-                      </Box>
-                      <Box sx={{ mt: 1 }}>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          fullWidth
-                          onClick={handleOpenTransferDialog}
-                        >
-                          Transfer NFT
-                        </Button>
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-        </Box>
-      )}
-      <TransferNFTDialog
-        open={isTransferDialogOpen}
-        onClose={handleCloseTransferDialog}
-        onTransfer={handleTransferNFT}
-      />
-    </>
+    <Container
+    sx={{
+      marginRight: "auto",
+      marginLeft: "auto",
+      width: "100%",
+      border: `2px solid ${theme.palette.colors.colors.grey[100]}`,
+      borderRadius: "24px",
+      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Adding a box shadow
+      padding: "16px", // Additional custom CSS for padding
+    }}
+  >
+
+  
+      <Box sx={{ margin: 4, display:"flex", justifyContent:"center" }}>
+        <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
+          <StyledTab label="NFTs" />
+          <StyledTab label="Crypto" />
+          <StyledTab label="Activity" />
+        </StyledTabs>
+        <Box sx={{ p: 3 }} />
+      </Box>
+      {value === 0 && <MyNFT />}
+      {value === 1 && <MyCrypto />}
+      {value === 2 && <MyActivity />}
+    </Container>
+
   );
 };
 
-export default Page;
+const App = () => {
+  return (
+    <div>
+      {/* Place any other components or content here */}
+      <CustomizedTabs />
+    </div>
+  );
+};
+
+export default App;

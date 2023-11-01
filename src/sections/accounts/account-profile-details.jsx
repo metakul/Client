@@ -168,11 +168,11 @@ export const AccountProfileDetails = () => {
           </Box>
         </CardContent>
         <Divider />
-        <CardActions sx={{ justifyContent: 'flex-end' }}>
+        {/* <CardActions sx={{ justifyContent: 'flex-end' }}>
           <Button variant="contained">
             Save details
           </Button>
-        </CardActions>
+        </CardActions> */}
       </Card>
     </form>
   );

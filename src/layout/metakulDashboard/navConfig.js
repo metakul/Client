@@ -59,7 +59,7 @@ export const navConfig = [
       to: "Laundry",
     },
     {
-      text: "NFT Staking",
+      text: "Metakul Collection",
       icon: <TodayOutlined />,
       to: "metakulNFT",
     },

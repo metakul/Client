@@ -41,7 +41,9 @@ export default function ProductsView() {
   };
 
   return (
-    <Container>
+    <Container sx={{
+     
+    }}>
       <Typography variant="h4" sx={{ mb: 5 }}>
         All NFT's
       </Typography>
@@ -53,7 +55,8 @@ export default function ProductsView() {
         justifyContent="flex-end"
         sx={{ mb: 5 }}
       >
-        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
+        <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1, ml:"50px",
+      mr:"50px", }}>
           <ProductFilters
             openFilter={openFilter}
             onOpenFilter={handleOpenFilter}

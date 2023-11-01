@@ -26,11 +26,10 @@ export const ResponsiveWrapper = styled('div')(({ theme }) => ({
   flex: 1,
   flexDirection: 'column',
   justifyContent: 'center',
-  margin: '10px 10% 10px 5%',
+  margin: '50px',
   padding:"24px",
   '@media (min-width:1000px)': {
     flexDirection: 'column',
-    margin: '0px 25% 10px 25%',
   },
   border:`1px solid ${theme.palette.colors.colors.grey[100]}`,
   borderRadius:"20px",
