@@ -95,30 +95,12 @@ const UnStaking = () => {
                 <SortButton  onClick={openWallet} >My Wallet</SortButton>
             </CategoriesContainer>
             {loading ? (
-                // Show the loading GIF while data is being fetched
                 <img src={loadingGif} alt="Loading" />
             ) : (
-                // Display the NFT list when data is available
                 <>
                     <Typography variant="h5" >NFT TO UNSTAKE</Typography>
 
-                    <Grid container spacing={2}>
-                        {mynfts.map((nft, index) => (
-                            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                                <NFTCard>
-                                    <Image
-                                        image={nft.metadata.image}
-                                        title={nft.metadata.name}
-                                    />
-                                    <CardContent>
-                                        <NFTName>{nft.metadata.name}</NFTName>
-                                        {/* Display more NFT details as needed */}
-                                        <StakeButton>UNStake NFT</StakeButton>
-                                    </CardContent>
-                                </NFTCard>
-                            </Grid>
-                        ))}
-                    </Grid>
+                    {/* use below grid here later */}
                 </>
             )}
         </Container>
@@ -126,3 +108,22 @@ const UnStaking = () => {
 };
 
 export default UnStaking;
+
+
+// <Grid container spacing={2}>
+//                         {mynfts.map((nft, index) => (
+//                             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+//                                 <NFTCard>
+//                                     <Image
+//                                         image={nft.metadata.image}
+//                                         title={nft.metadata.name}
+//                                     />
+//                                     <CardContent>
+//                                         <NFTName>{nft.metadata.name}</NFTName>
+//                                         {/* Display more NFT details as needed */}
+//                                         <StakeButton>UNStake NFT</StakeButton>
+//                                     </CardContent>
+//                                 </NFTCard>
+//                             </Grid>
+//                         ))}
+//                     </Grid>

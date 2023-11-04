@@ -68,11 +68,7 @@ const MyNFT = () => {
 
   return (
     <>
-      {loading ? (
-        <Backdrop open={true} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: '#fff' }}>
-        <img src={loadingGif} alt="Loading..." />
-     </Backdrop>
-      ) : (
+    
         <Box
           component="main"
           sx={{
@@ -84,6 +80,10 @@ const MyNFT = () => {
             <Typography variant="h4" gutterBottom>
               My NFTs
             </Typography>
+
+              {loading ? (
+        <img src={loadingGif} alt="Loading..." />
+      ) : (
             <Grid container spacing={3}>
               {nfts.map((nft, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
@@ -138,9 +138,10 @@ const MyNFT = () => {
                 </Grid>
               ))}
             </Grid>
+      )}
+
           </Container>
         </Box>
-      )}
    
       <TransferNFTDialog
   open={isTransferDialogOpen}

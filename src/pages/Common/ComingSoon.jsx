@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Box } from '@mui/material';
+import { Grid, Typography, Box,Button } from '@mui/material';
 import { styled, keyframes } from '@mui/system';
 
 import winners_nft1 from '../../assets/images/winners_nft1.svg';
@@ -175,8 +175,21 @@ const DescriptionText2 = styled(Typography)`
 function MyComponent() {
   return (
     <CustomGrid container>
-        <Typography variant='h3'>Coming Soon</Typography>
+         <Typography variant="h3" sx={{ m: 2 }}>
+        MARKETPLACE Coming Soon
+      </Typography>
+      <HowItWorksText variant="h5" sx={{ m: 4 }}>
+        Till then keep earning $KULL with your NFT here
+        <Button variant="contained" color="primary" sx={{ marginLeft: 2 }} href="/staking">
+          Stake
+        </Button>
+      </HowItWorksText>
+      <Typography variant='h5' sx={{
+          m:4
+        }}>BUY OR SELL NFT To EARN  <a href="https://thirdweb.com/polygon/0xE9fd323D7B1e4cFd07C657E218F7da16efd6532f" target="_blank">$KULL</a> AND PAY FOR YOUR UTILITIES
+</Typography>
       <Grid item xs={12}>
+
         <CustomImageContainer >
                <PlusButtonContainer>
             <MintNftLable>CLAIM YOUR</MintNftLable>

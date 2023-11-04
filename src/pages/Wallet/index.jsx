@@ -79,8 +79,8 @@ const CustomizedTabs = () => {
           <StyledTab label="Activity" />
         </StyledTabs>
       </Box>
-      {value === 0 && <MyCrypto />}
-      {value === 1 && <MyNFT />}
+      {value === 0 && <MyNFT />}
+      {value === 1 && <MyCrypto />}
       {value === 2 && <MyActivity />}
     </Container>
 

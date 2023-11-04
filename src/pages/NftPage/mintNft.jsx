@@ -38,6 +38,7 @@ const StyledCardHeader = styled(Typography)(({ theme }) => ({
   fontSize: '2rem',
   fontWeight: 'bold',
   marginBottom: theme.spacing(2),
+  color:theme.palette.colors.colors.primary[100]
 }));
 
 const StyledButton = styled(Button)(({ theme, colors }) => ({
@@ -57,19 +58,19 @@ const MintPage = () => {
   const [password, setPassword] = useState(''); // Use "password" instead of "address"
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // Fetch the user's NFTs when the component mounts
-    // You should replace this example with your actual data fetching logic
-    FetchMynfts()
-      .then((response) => {
-        if (response.data && response.data.length > 0) {
-          navigate("/staking")
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching NFTs:', error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Fetch the user's NFTs when the component mounts
+  //   // You should replace this example with your actual data fetching logic
+  //   FetchMynfts()
+  //     .then((response) => {
+  //       if (response.data && response.data.length > 0) {
+  //         navigate("/staking")
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching NFTs:', error);
+  //     });
+  // }, []);
 
   const handleClaim = async () => {
     try {
@@ -93,7 +94,7 @@ const MintPage = () => {
       <StyledContent colors={colors}>
      
           <>
-            <StyledCardHeader>Mint NFT</StyledCardHeader>
+            <StyledCardHeader>Claim Your Free NFT</StyledCardHeader>
             <TextField
   variant="outlined"
   value={password}
