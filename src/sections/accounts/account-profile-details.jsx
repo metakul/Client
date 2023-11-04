@@ -30,14 +30,15 @@ const states = [
   }
 ];
 
-export const AccountProfileDetails = () => {
+export const AccountProfileDetails = (userProfile) => {
+
   const [values, setValues] = useState({
-    firstName: 'Anika',
-    lastName: 'Visser',
-    email: 'demo@devias.io',
+    firstName: userProfile.userProfile.firstName,
+    lastName: userProfile.userProfile.lastName,
+    email: userProfile.userProfile.email,
     phone: '',
-    state: 'los-angeles',
-    country: 'USA'
+    // state: 'los-angeles',
+    country: userProfile.userProfile.user_country
   });
 
   const handleChange = useCallback(
@@ -65,7 +66,7 @@ export const AccountProfileDetails = () => {
     >
       <Card>
         <CardHeader
-          subheader="The information can be edited"
+          // subheader="The information can be edited"
           title="Profile"
         />
         <CardContent sx={{ pt: 0 }}>
@@ -80,12 +81,12 @@ export const AccountProfileDetails = () => {
               >
                 <TextField
                   fullWidth
-                  helperText="Please specify the first name"
-                  label="First name"
+                  helperText="FIRST NAME"
                   name="firstName"
                   onChange={handleChange}
                   required
-                  value={values.firstName}
+                  value={ userProfile.userProfile.firstName}
+                  disabled
                 />
               </Grid>
               <Grid
@@ -94,11 +95,13 @@ export const AccountProfileDetails = () => {
               >
                 <TextField
                   fullWidth
-                  label="Last name"
+                  helperText="LAST NAME"
+
                   name="lastName"
                   onChange={handleChange}
                   required
-                  value={values.lastName}
+                  value={ userProfile.userProfile.lastName}
+                  disabled
                 />
               </Grid>
               <Grid
@@ -107,11 +110,13 @@ export const AccountProfileDetails = () => {
               >
                 <TextField
                   fullWidth
-                  label="Email Address"
+                  helperText="EMAIL"
+
                   name="email"
                   onChange={handleChange}
                   required
-                  value={values.email}
+                  value={ userProfile.userProfile.email}
+                  disabled
                 />
               </Grid>
               <Grid
@@ -133,18 +138,20 @@ export const AccountProfileDetails = () => {
               >
                 <TextField
                   fullWidth
-                  label="Country"
+                  helperText="COUNTRY"
+
                   name="country"
                   onChange={handleChange}
                   required
-                  value={values.country}
+                  value={ userProfile.userProfile.user_country}
+                  disabled
                 />
               </Grid>
               <Grid
                 xs={12}
                 md={6}
               >
-                <TextField
+                {/* <TextField
                   fullWidth
                   label="Select State"
                   name="state"
@@ -162,7 +169,7 @@ export const AccountProfileDetails = () => {
                       {option.label}
                     </option>
                   ))}
-                </TextField>
+                </TextField> */}
               </Grid>
             </Grid>
           </Box>

@@ -175,7 +175,7 @@ const HeroSection = () => {
         <div sx={{ position: "relative" }}>
           <Button sx={{ background:colors.secondary[800],  borderRadius: "lg", px: 3, py: 2, mt: 3 }}>
             <Link style={{
-               color:colors.grey[100]
+               color:"white"
             }} to="/login">REGISTER</Link>
           </Button>
         </div>
@@ -184,7 +184,7 @@ const HeroSection = () => {
         // You can add content specific to logged-in users here
         <Button variant="contained" sx={{ borderRadius: "lg", px: 3, py: 2, mt: 3 }}>
         <Link style={{
-          color:colors.grey[100]
+          color:"white"
         }} to="/nft">Claim Metaverse Land</Link>
       </Button>
       )}

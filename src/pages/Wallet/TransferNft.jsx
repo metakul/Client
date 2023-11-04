@@ -8,12 +8,12 @@ import {
   Box,
 } from '@mui/material';
 
-const TransferNFTDialog = ({ open, onClose, onTransfer }) => {
-  const [recipientAddress, setRecipientAddress] = useState('');
+const TransferNFTDialog = ({ open, onClose, onTransfer, tokenID }) => {
+  const [receiverAddress, setRecipientAddress] = useState('');
   const [password, setPassword] = useState('');
 
   const handleTransfer = () => {
-    onTransfer(recipientAddress, password);
+    onTransfer(receiverAddress, password, tokenID); // Pass tokenID to the onTransfer function
     onClose();
   };
 
@@ -24,7 +24,7 @@ const TransferNFTDialog = ({ open, onClose, onTransfer }) => {
         <TextField
           label="Recipient Address"
           fullWidth
-          value={recipientAddress}
+          value={receiverAddress}
           onChange={(e) => setRecipientAddress(e.target.value)}
           margin="normal"
         />

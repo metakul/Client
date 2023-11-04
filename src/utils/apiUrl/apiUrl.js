@@ -16,6 +16,8 @@ export * from './Auth/Post/postApi';    // Import and re-export User functions
 export const registerUser = async (data) => {
   try {
     const response = await authApi.post("/user/registerUser", {
+      firstName:data.firstName,
+      lastName:data.lastName,
       email:data.email,
       password:data.password,
       phoneNumber:data.phoneNumber,

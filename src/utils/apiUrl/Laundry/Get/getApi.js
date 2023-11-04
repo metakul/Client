@@ -10,7 +10,6 @@ import {
 export const FetchMyOrders = async (data) => {
     try {
         const accessToken = await getAccessTokenFromCookie(); // Retrieve access token
-        console.log(accessToken)
 
         // Send a request to the server to logout the user
         const response = await laundryApi.post("/laundry/getOrdersByUserEmail", {

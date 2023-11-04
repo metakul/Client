@@ -67,19 +67,20 @@ const CustomizedTabs = () => {
       borderRadius: "24px",
       boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Adding a box shadow
       padding: "8px", // Additional custom CSS for padding
+      maxWidth:"800px !important"
     }}
   >
 
   
-      <Box sx={{ margin: 2, display:"flex", justifyContent:"center" }}>
+      <Box sx={{ margin: 2, display:"flex", justifyContent:"center", }} >
         <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs">
-          <StyledTab label="NFTs" />
           <StyledTab label="Crypto" />
+          <StyledTab label="NFTs" />
           <StyledTab label="Activity" />
         </StyledTabs>
       </Box>
-      {value === 0 && <MyNFT />}
-      {value === 1 && <MyCrypto />}
+      {value === 0 && <MyCrypto />}
+      {value === 1 && <MyNFT />}
       {value === 2 && <MyActivity />}
     </Container>
 

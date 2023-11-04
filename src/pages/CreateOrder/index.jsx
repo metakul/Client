@@ -1,171 +1,126 @@
 import React, { useState } from 'react';
-import {
-  Container,
-  Typography,
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Grid,
-  Paper,
-} from '@mui/material';
+import { Container, Stepper, Step, StepLabel, Button, Paper } from '@mui/material';
+import toast from 'react-hot-toast'; 
 
-const LaundryOrderPage = () => {
-  const [sem, setSem] = useState('');
-  const [hostel, setHostel] = useState('');
-  const [room, setRoom] = useState('');
-  const [items, setItems] = useState({
-    shirts: 0,
-    pants: 0,
-    jeans: 0,
-    shorts: 0,
-    towel: 0,
-    bsheet: 0,
-    pillow: 0,
-  });
-  const [services, setServices] = useState({
-    wash: false,
-    iron: false,
-  });
-  const [date, setDate] = useState(new Date());
+import ClothesSelection from './ClothesSelection';
+import HostelAddress from './HostelAddress';
+import PaymentInformation from './PaymentInformation';
+import { CreateOrder } from '../../utils/apiUrl/Laundry/Post/PostApi';
+const steps = ['Hostel Address', 'Clothes Selection', 'Payment Information'];
 
-  const handleCreateOrder = () => {
-    // Create an order object and send it to the server
-    const orderData = {
-      sem,
-      hostel,
-      room,
-      ...items,
-      ...services,
-      date,
-    };
+function getStepContent(step, stepData, setStepData) {
+  switch (step) {
+    case 0:
+      return <HostelAddress stepData={stepData} setStepData={setStepData} />;
+    case 1:
+      return <ClothesSelection stepData={stepData} setStepData={setStepData} />;
+    case 2:
+      return <PaymentInformation stepData={stepData} setStepData={setStepData} />;
+    default:
+      return 'Unknown step';
+  }
+}
 
-    // Send the order data to your server for processing (e.g., using fetch or Axios)
-    // Replace the following line with your actual API call
-    fetch('/api/createOrder', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(orderData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Order created:', data);
-        // Handle success or error here
-      })
-      .catch((error) => {
-        console.error('Error creating order:', error);
-      });
+function NewOrders() {
+  const [activeStep, setActiveStep] = useState(0);
+  const [stepData, setStepData] = useState({
+        date: new Date(),
+        address: {},
+        clothesSelection: {},
+        paymentInfo: {
+            useCOD: false,
+            useKULL: true,
+        },
+        totalAmount: 0, // Add this field to store the total amount
+        password: '', // Add this field to store the password
+    });
+    
+
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
   };
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+    setStepData({
+        date: new Date(),
+        address: {},
+        clothesSelection: {},
+        paymentInfo: {
+            useCOD: false,
+            useKULL: true,
+        },
+        totalAmount: 0, // Add this field to store the total amount
+        password: '', // Add this field to store the password
+    });
+}
+
+
+const handleCreateOrder = async () => {
+  try {
+    console.log('Order Data:', stepData);
+
+    // Make the API call to create an order
+    const response = await CreateOrder(stepData);
+
+    if (response.status === 200) {
+      // If the response status is 200, show a success toast message
+      toast.success(response.data.message);
+      console.log('Order created successfully:', response);
+
+      // For example, you can check if useCOD or useKULL is selected and access the password and amount.
+    } else {
+      // Handle other status codes or errors here
+      console.error('Order creation failed. Status:', response.status);
+    }
+  } catch (error) {
+    // Handle any errors that occur during the API call
+    console.error('Error creating order:', error);
+    // You can also show an error message to the user if needed.
+  }
+};
+
+  
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
-        Create Laundry Order
-      </Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-            <InputLabel>Semester</InputLabel>
-            <Select value={sem} onChange={(e) => setSem(e.target.value)}>
-              <MenuItem value="1">Semester 1</MenuItem>
-              <MenuItem value="2">Semester 2</MenuItem>
-              {/* Add more semesters as needed */}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-            <InputLabel>Hostel</InputLabel>
-            <Select value={hostel} onChange={(e) => setHostel(e.target.value)}>
-              <MenuItem value="A">Hostel A</MenuItem>
-              <MenuItem value="B">Hostel B</MenuItem>
-              {/* Add more hostels as needed */}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-            <InputLabel>Room</InputLabel>
-            <Select value={room} onChange={(e) => setRoom(e.target.value)}>
-              <MenuItem value="101">Room 101</MenuItem>
-              <MenuItem value="102">Room 102</MenuItem>
-              {/* Add more rooms as needed */}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper elevation={3}>
-            <Box p={2}>
-              <Typography variant="h6">Laundry Items</Typography>
-              {Object.entries(items).map(([item, count]) => (
-                <FormControl key={item} fullWidth>
-                  <InputLabel>{item}</InputLabel>
-                  <Select
-                    value={count}
-                    onChange={(e) =>
-                      setItems({ ...items, [item]: e.target.value })
-                    }
-                  >
-                    <MenuItem value={0}>0</MenuItem>
-                    <MenuItem value={1}>1</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                  </Select>
-                </FormControl>
-              ))}
-            </Box>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper elevation={3}>
-            <Box p={2}>
-              <Typography variant="h6">Services</Typography>
-              {Object.entries(services).map(([service, selected]) => (
-                <FormControlLabel
-                  key={service}
-                  control={
-                    <Checkbox
-                      checked={selected}
-                      onChange={(e) =>
-                        setServices({ ...services, [service]: e.target.checked })
-                      }
-                      color="primary"
-                    />
-                  }
-                  label={service}
-                />
-              ))}
-            </Box>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
-            <InputLabel>Date</InputLabel>
-            <input
-              type="date"
-              value={date.toISOString().split('T')[0]}
-              onChange={(e) => setDate(new Date(e.target.value))}
-            />
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleCreateOrder}
-          >
-            Create Order
-          </Button>
-        </Grid>
-      </Grid>
+      <Stepper activeStep={activeStep}>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <Paper elevation={3}>
+        {activeStep === steps.length ? (
+          <div>
+            <h3>Order created successfully!</h3>
+            <Button onClick={handleReset}>Create Another Order</Button>
+          </div>
+        ) : (
+          <div>
+            {getStepContent(activeStep, stepData, setStepData)}
+            <div>
+              <Button disabled={activeStep === 0} onClick={handleBack}>
+                Back
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={activeStep === steps.length - 1 ? handleCreateOrder : handleNext}
+              >
+                {activeStep === steps.length - 1 ? 'Create Order' : 'Next'}
+              </Button>
+            </div>
+          </div>
+        )}
+      </Paper>
     </Container>
   );
-};
+}
 
-export default LaundryOrderPage;
+export default NewOrders;

@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import copy from "clipboard-copy"; // Import the clipboard-copy library to copy text to the clipboard
 import toast from "react-hot-toast";
 import { ColorModeContext, tokens } from "../../theme";
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import {
   LightModeOutlined,
   DarkModeOutlined,
@@ -36,8 +37,9 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import Person4OutlinedIcon from "@mui/icons-material/Person4Outlined";
 import Groups2TwoToneIcon from '@mui/icons-material/Groups2TwoTone';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
+import useIsLoggedIn from "../../hooks/isUserLogin";
 
-import { userLogout} from "../../utils/apiUrl/apiUrl";
+import { userLogout } from "../../utils/apiUrl/apiUrl";
 
 import RedeemTwoToneIcon from '@mui/icons-material/RedeemTwoTone';
 
@@ -88,6 +90,7 @@ const Menus = styled(MenuItem)`
   padding-top: 20px !important;
 `;
 
+
 const Topbar = ({
   user,
   isSidebarOpen,
@@ -101,11 +104,13 @@ const Topbar = ({
   const colorMode = useContext(ColorModeContext);
   const [smartWalletAddress, setSmartWalletAddress] = useState(null);
   const [isIconClicked, setIsIconClicked] = useState(false); // Define isIconClicked state here
+  const isLoggedIn = useIsLoggedIn();
+
 
   const iconClickedStyle = {
     transform: isIconClicked ? 'scale(0.8)' : 'scale(1)',
     transition: 'transform 0.3s',
-    ml:2
+    ml: 2
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -116,28 +121,19 @@ const Topbar = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
+  console.log(user)
+
 
   useEffect(() => {
-    setSmartWalletAddress("0x6975be450864c02b4613023c2152ee0743572325");
-    const accessToken = Cookies.get("accessToken"); // Get the accessToken from cookies
-    if (accessToken) {
-      // Decode the JWT token to retrieve the smartWalletAddress
-      try {
-        const decodedToken = jwt_decode.decode(accessToken);
-        if (decodedToken) {
-          const smartWalletAddress = decodedToken.smartWalletAddress;
-          setSmartWalletAddress(smartWalletAddress);
-        }
-      } catch (error) {
-        console.error("Error decoding accessToken:", error);
-      }
+    if(user){
+    setSmartWalletAddress(user.smartWalletAddress);
     }
   }, []);
 
   const handleCopySmartWalletAddress = () => {
-    if (smartWalletAddress) {
+    if (user.smartWalletAddress) {
       setIsIconClicked(true);
-      copy(smartWalletAddress)
+      copy(user.smartWalletAddress)
         .then(() => {
           toast.success("Copied");
         })
@@ -165,12 +161,16 @@ const Topbar = ({
     try {
       // Call the userLogout function from your API to log the user out on the server side
       await userLogout();
-      window.location.reload();
       navigate("/");
+      window.location.reload();
     } catch (error) {
       // Handle any errors that may occur during the logout process
     }
   };
+
+  const openWallet = async () => {
+    navigate("/wallet")
+  }
 
   return (
     <AppBar
@@ -217,11 +217,12 @@ const Topbar = ({
               <LightModeOutlined />
             )}
           </IconButton>
-          <IconButton>
-            <SettingsOutlined sx={{ fontSize: "25px" }} />
-          </IconButton>
-
-          <FlexBetween>
+          {isLoggedIn ? (
+            <>
+            <IconButton onClick={openWallet}>
+              <AccountBalanceWalletOutlinedIcon sx={{ fontSize: "25px" }} />
+            </IconButton>
+            <FlexBetween>
             <div className="flex justify-between items-center mt-11 sm:mt-11 md:mt-0 lg:mt-0 mx-2 ">
               <Button
                 className=" "
@@ -246,45 +247,46 @@ const Topbar = ({
                     <div>
                       <Avatar>
                         <img src="assets/user.png" />
-                    </Avatar>
+                      </Avatar>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Button>
+              </Button>
 
-            <StyledMenu
-              id="demo-customized-menu"
-              MenuListProps={{
-                "aria-labelledby": "demo-customized-button",
-              }}
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              colors={colors}
-            >
-              <div className="text-gray font-black text-sm tracking-wide pb-9">
-                Hi Rabbit !
-              </div>
-              {/* {smartWalletAddress && ( */}
-              <Typography
-                sx={{
-                  position: "relative",
-                  left: "10%",
-                  display: "flex",
-                  alignItems: "center",
+              <StyledMenu
+                id="demo-customized-menu"
+                MenuListProps={{
+                  "aria-labelledby": "demo-customized-button",
                 }}
-                variant="body2"
-                color="textSecondary"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                colors={colors}
               >
-                B134 ... c945
+                <div className="text-gray font-black text-sm tracking-wide pb-9">
+                  Hi {user.email} !
+                </div>
+                {/* {smartWalletAddress && ( */}
+                <Typography
+                  sx={{
+                    position: "relative",
+                    left: "10%",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                  variant="body2"
+                  color="textSecondary"
+                >
+                  {user.smartWalletAddress.slice(0, 3) + "..." + user.smartWalletAddress.slice(-4)}
                   <ContentCopyOutlinedIcon
                     onClick={handleCopySmartWalletAddress}
                     sx={iconClickedStyle}
                   />
-              </Typography>
-              {/* )} */}
+                </Typography>
 
-              {/* <Menus onClick={handleClose} disableRipple
+                {/* )} */}
+
+                {/* <Menus onClick={handleClose} disableRipple
                   sx={{
                       '&:hover': {
                           background: "#1C2438",
@@ -293,48 +295,52 @@ const Topbar = ({
                   <EditIcon />
                   Edit
               </Menus> */}
-              <Paper>
-                <StyledMenuItem colors={colors}>
-                  <Avatar>
-                    <Person4OutlinedIcon />
-                  </Avatar>
-                  <Typography onClick={handleOpenProfile}>Profile</Typography>
-                </StyledMenuItem>
-              </Paper>
-              <Paper>
+                <Paper>
+                  <StyledMenuItem colors={colors}>
+                    <Avatar>
+                      <Person4OutlinedIcon />
+                    </Avatar>
+                    <Typography onClick={handleOpenProfile}>Profile</Typography>
+                  </StyledMenuItem>
+                </Paper>
+                <Paper>
 
-                <StyledMenuItem colors={colors}>
-                  <Avatar>
-                    <RedeemTwoToneIcon />
-                  </Avatar>
-                  <Typography onClick={handleOpenWallet}>My Wallet</Typography>
-                </StyledMenuItem>
+                  <StyledMenuItem colors={colors}>
+                    <Avatar>
+                      <RedeemTwoToneIcon />
+                    </Avatar>
+                    <Typography onClick={handleOpenWallet}>My Wallet</Typography>
+                  </StyledMenuItem>
 
-              </Paper>
-              <Paper>
-                <StyledMenuItem colors={colors}>
-                  <Avatar>
-                    <Groups2TwoToneIcon />
-                  </Avatar>
-                  <Typography>Referral</Typography>
-                </StyledMenuItem>
-              </Paper>
+                </Paper>
+                <Paper>
+                  <StyledMenuItem colors={colors}>
+                    <Avatar>
+                      <Groups2TwoToneIcon />
+                    </Avatar>
+                    <Typography>Referral</Typography>
+                  </StyledMenuItem>
+                </Paper>
 
-              <Paper>
-                <StyledMenuItem colors={colors} onClick={handleLogout}>
-                  <Avatar>
-                    <LogoutOutlinedIcon />
-                  </Avatar>
-                  <Typography>Log Out</Typography>
-                </StyledMenuItem>
-              </Paper>
-            </StyledMenu>
-          </div>
+                <Paper>
+                  <StyledMenuItem colors={colors} onClick={handleLogout}>
+                    <Avatar>
+                      <LogoutOutlinedIcon />
+                    </Avatar>
+                    <Typography>Log Out</Typography>
+                  </StyledMenuItem>
+                </Paper>
+              </StyledMenu>
+            </div>
+          </FlexBetween>
+            </>            
+          ) : null}
+
+        
         </FlexBetween>
-      </FlexBetween>
-    </Toolbar>
-  </AppBar>
-);
+      </Toolbar>
+    </AppBar>
+  );
 };
 
 export default Topbar;

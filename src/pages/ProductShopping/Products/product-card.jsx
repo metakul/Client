@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { fCurrency } from '../../../utils/format-number';
 
 import { ColorPreview } from '../../../components/color-utils';
+import { Button } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -53,6 +54,19 @@ export default function ShopProductCard({ product }) {
         >
           View on OpenSea
         </Link>
+        <Button variant="contained" color="secondary">
+
+        <Link
+          href={product.openSeaLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="subtitle2"
+        >
+
+          Buy Now
+        </Link>
+        </Button>
+
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <ColorPreview colors={[]} />

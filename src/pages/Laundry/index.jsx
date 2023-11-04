@@ -3,6 +3,7 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+
 import {
   Container,
   Box,
@@ -16,6 +17,11 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+
 import {
   DeleteOutline as DeleteIcon,
   MoreVert as MoreIcon,
@@ -24,6 +30,7 @@ import {
 } from "@mui/icons-material";
 
 import { FetchMyOrders } from '../../utils/apiUrl/Laundry/Get/getApi';
+import { markOrderAsPickedUp } from '../../utils/apiUrl/Laundry/Post/PostApi';
 
 // Import your loading GIF
 import loadingGif from '../../assets/gif/loading_24.gif';
@@ -36,6 +43,9 @@ export default function BasicEditingGrid() {
   const [openMenu, setOpenMenu] = React.useState(null);
   const [selectedRowId, setSelectedRowId] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+const [selectedClothesSelection, setSelectedClothesSelection] = React.useState(null);
+
 
   React.useEffect(() => {
     FetchMyOrders()
@@ -54,16 +64,51 @@ export default function BasicEditingGrid() {
     setSearchQuery(event.target.value);
   };
 
+ // Modify the handleMarkAsPickedUp function to accept orderNumber
+const handleMarkAsPickedUp = async (orderNumber) => {
+  try {
+    console.log(orderNumber);
+    const response = await markOrderAsPickedUp(orderNumber);
+    console.log(response);
+    if (response.status === 200) {
+      // Order marked as picked up successfully, you can handle success here
+      console.log("Order marked as picked up successfully");
+    } else {
+      // Handle other status codes or error conditions
+      console.error("Failed to mark order as picked up");
+    }
+  } catch (error) {
+    // Handle API request error
+    console.error("API request error:", error);
+  }
+};
+
   const columns = [
-    { field: "_id", headerName: "ID", width: 120, editable: false },
-  { field: "orderNumber", headerName: "Order Number", width: 260, editable: false },
-  { field: "status", headerName: "Status", width: 180, editable: false },
-  { field: "items", headerName: "Items", width: 180, editable: false },
-  { field: "services", headerName: "Services", width: 180, editable: false },
-    {
+  { field: "_id", headerName: "ID", width: 220, editable: false },
+  { field: "orderNumber", headerName: "Order Number", width: 180, editable: false },
+  { field: "status", headerName: "Status", width: 150, editable: false },
+  {
+    field: "viewClothes",
+    headerName: "View Clothes",
+    width: 180,
+    editable: false,
+    renderCell: (params) => (
+      <Button
+      variant="contained"
+        onClick={() => {
+          setSelectedClothesSelection(params.row.clothesSelection);
+          setIsDialogOpen(true);
+          console.log(params.row.clothesSelection)
+        }}
+      >
+        View Clothes
+      </Button>
+    ),
+  }, 
+  {
       field: "actions",
       headerName: "Actions",
-      width: 200,
+      width: 240,
       editable: false,
       renderCell: (params) => (
         <div>
@@ -71,7 +116,7 @@ export default function BasicEditingGrid() {
             variant="contained"
             onClick={(event) => {
               setOpenMenu(event.currentTarget);
-              setSelectedRowId(params.row._id);
+              setSelectedRowId(params.row.orderNumber);
             }}
           >
             <MoreIcon />
@@ -172,7 +217,7 @@ export default function BasicEditingGrid() {
                 }}
                   rows={rows}
                   columns={columns}
-                  getRowId={(row) => row._id}
+                  getRowId={(row) => row.orderNumber}
                   initialState={{
                     pagination: { paginationModel: { pageSize: 10 } },
                   }}
@@ -200,15 +245,16 @@ export default function BasicEditingGrid() {
             }}
           >
             <MenuItem
-              onClick={() => {
-                setOpenMenu(null);
-              }}
-            >
-              <ListItemIcon>
-                <PersonIcon sx={{ color: "#000000DE" }} />
-              </ListItemIcon>
-              Edit
-            </MenuItem>
+  onClick={() => {
+    handleMarkAsPickedUp(selectedRowId);
+    setOpenMenu(null);
+  }}
+>
+  <ListItemIcon>
+    <PersonIcon sx={{ color: "#000000DE" }} />
+  </ListItemIcon>
+  Mark as PickedUp
+</MenuItem>
             <MenuItem
               onClick={() => {
                 setOpenMenu(null);
@@ -218,11 +264,23 @@ export default function BasicEditingGrid() {
               <ListItemIcon>
                 <DeleteIcon sx={{ color: "#ff4842" }} />
               </ListItemIcon>
-              <Box sx={{ color: "#ff4842" }}>Delete</Box>
+              <Box sx={{ color: "#ff4842" }}>Need Help?</Box>
             </MenuItem>
           </Menu>
         </Paper>
       </Box>
+      <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+  <DialogTitle>Clothes Selection</DialogTitle>
+  <DialogContent>
+    {selectedClothesSelection && (
+      <pre>{JSON.stringify(selectedClothesSelection, null, 2)}</pre>
+    )}
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={() => setIsDialogOpen(false)}>Close</Button>
+  </DialogActions>
+</Dialog>
+
     </Container>
   );
 }

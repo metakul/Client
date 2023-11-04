@@ -1,7 +1,7 @@
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 
-import Iconify from '../../../components/iconify';
+import OpenSeaIcon from '../../../assets/logo/opensea-logo.svg'; // Replace with the correct path to your SVG
 
 // ----------------------------------------------------------------------
 
@@ -25,11 +25,13 @@ const StyledRoot = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function CartWidget() {
+  const openSeaUrl = 'https://opensea.io/collection/metakul'; // Replace with your OpenSea URL
+
   return (
-    <StyledRoot>
-      <Badge showZero badgeContent={0} color="error" max={99}>
-        <Iconify icon="eva:shopping-cart-fill" width={24} height={24} />
-      </Badge>
-    </StyledRoot>
+    <a href={openSeaUrl} target="_blank" rel="noopener noreferrer">
+      <StyledRoot>
+          <img src={OpenSeaIcon} alt="OpenSea" width={48} height={48} />
+      </StyledRoot>
+    </a>
   );
 }

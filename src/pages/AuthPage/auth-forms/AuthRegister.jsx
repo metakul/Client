@@ -38,8 +38,8 @@ const AuthRegister = () => {
   const [level, setLevel] = useState();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     email: '',
     company: '',
     password: '',
@@ -70,8 +70,8 @@ const AuthRegister = () => {
 
       if (response.status === 201) {
         setFormData({
-          firstname: '',
-          lastname: '',
+          firstName: '',
+          lastName: '',
           email: '',
           company: '',
           password: '',
@@ -98,18 +98,18 @@ const AuthRegister = () => {
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Stack spacing={1}>
-              <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
+              <InputLabel htmlFor="firstName-signup">First Name*</InputLabel>
               <OutlinedInput
-                id="firstname-login"
-                type="firstname"
-                value={formData.firstname}
-                onChange={(e) => setFormData({ ...formData, firstname: e.target.value })}
+                id="firstName-login"
+                type="firstName"
+                value={formData.firstName}
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                 placeholder="John"
                 fullWidth
-                error={error.includes('firstname')}
+                error={error.includes('firstName')}
               />
-              {error.includes('firstname') && (
-                <FormHelperText error id="helper-text-firstname-signup">
+              {error.includes('firstName') && (
+                <FormHelperText error id="helper-text-firstName-signup">
                   {error}
                 </FormHelperText>
               )}
@@ -117,19 +117,19 @@ const AuthRegister = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Stack spacing={1}>
-              <InputLabel htmlFor="lastname-signup">Last Name*</InputLabel>
+              <InputLabel htmlFor="lastName-signup">Last Name*</InputLabel>
               <OutlinedInput
                 fullWidth
-                error={error.includes('lastname')}
-                id="lastname-signup"
-                type="lastname"
-                value={formData.lastname}
-                onChange={(e) => setFormData({ ...formData, lastname: e.target.value })}
+                error={error.includes('lastName')}
+                id="lastName-signup"
+                type="lastName"
+                value={formData.lastName}
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                 placeholder="Doe"
                 inputProps={{}}
               />
-              {error.includes('lastname') && (
-                <FormHelperText error id="helper-text-lastname-signup">
+              {error.includes('lastName') && (
+                <FormHelperText error id="helper-text-lastName-signup">
                   {error}
                 </FormHelperText>
               )}

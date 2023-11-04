@@ -6,6 +6,7 @@ import Topbar from "../../components/global/Topbar";
 import navConfig from "./navConfig";
 import Nav from "../../components/nav/Nav";
 import {  useMediaQuery } from "@mui/material";
+import useFetchUserByUsername from "../../hooks/fetchUserByJWT";
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
 
@@ -28,20 +29,21 @@ export default function DashboardLayout() {
   
   const isNonMobile = useMediaQuery("(min-width: 766px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const user=useFetchUserByUsername()
 
   return (
     <>
           <StyledRoot>
 
       <Topbar
-          user={{}}
+          user={user.data}
           isSidebarOpen={isSidebarOpen}
           isNonMobile={isNonMobile}
           setIsSidebarOpen={setIsSidebarOpen}
           drawerWidth="250px"
       />
         <Nav
-          user={ {}}
+          user={user.data}
           isNonMobile={isNonMobile}
           drawerWidth="250px"
           isSidebarOpen={isSidebarOpen}

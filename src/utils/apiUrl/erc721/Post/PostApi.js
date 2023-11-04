@@ -27,3 +27,23 @@ export const ClaimNFT = async (password) => {
     }
 };
 
+export const TransferNFT = async (receiverAddress, password, tokenID) => {
+    try {
+        const accessToken = await getAccessTokenFromCookie(); // Retrieve access token
+        // Send a request to the server to logout the user
+        const response = await ERC721API.post("/transferNft",{
+            receiverAddress, password, tokenID
+        },{
+            headers: {
+              authorization: `Bearer ${accessToken}`,
+            },
+          });
+
+        return response
+    } catch (error) {
+        // Handle any errors that may occur during the logout process
+        console.log(error)
+        throw error
+    }
+};
+

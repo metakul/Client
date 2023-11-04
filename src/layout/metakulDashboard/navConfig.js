@@ -31,16 +31,10 @@ export const navConfig = [
       icon: <ShoppingCartOutlined />,
       to: "NFT",
     },
-
     {
-      text: "KYC",
-      icon: <PublicOutlined />,
-      to: "kyc",
-    },
-    {
-      text: "Career",
-      icon: <CalendarMonthOutlined />,
-      to: "Career",
+      text: "Metakul Collection",
+      icon: <TodayOutlined />,
+      to: "metakulNFT",
     },
     {
       text: "Marketplace",
@@ -59,14 +53,29 @@ export const navConfig = [
       to: "Laundry",
     },
     {
-      text: "Metakul Collection",
-      icon: <TodayOutlined />,
-      to: "metakulNFT",
+      text: "NFT Staking",
+      icon: <PieChartOutlined />,
+      to: "Staking",
     },
     {
       text: "Profile",
       icon: <AdminPanelSettingsOutlined />,
       to: "Profile",
+    },
+    {
+      text: "Extras",
+      icon:null,
+      to: "",
+    },
+    {
+      text: "KYC",
+      icon: <PublicOutlined />,
+      to: "kyc",
+    },
+    {
+      text: "Career",
+      icon: <CalendarMonthOutlined />,
+      to: "Career",
     },
   ];
 

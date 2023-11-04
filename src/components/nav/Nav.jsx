@@ -103,6 +103,7 @@ export default function Nav({
            marginLeft: 2,
            borderRadius: 4,
            height: "85%",
+           paddingBottom:"40px"
          },
        }}
      >
@@ -117,7 +118,7 @@ export default function Nav({
              />
            </FlexBetween>
            <Divider color={colors.secondary[100]} />
-       {/* {isLoggedIn ? ( */}
+       {isLoggedIn ? (
 
            <List>
              {navConfig.map(({ text, icon, to }) => {
@@ -171,9 +172,11 @@ export default function Nav({
                );
              })}
            </List>
-              {/* ):(
+              ):(
                 renderRegistrationButton()
-               )} */}
+               )}
+           <Divider color={colors.secondary[100]} />
+
          </Box>
     
        </Scrollbar>
@@ -194,6 +197,8 @@ export default function Nav({
               marginLeft: 2,
               borderRadius: 4,
               height: "85%",
+              paddingBottom:"40px"
+
             },
           }}
         >
@@ -208,7 +213,7 @@ export default function Nav({
                    />
                  </FlexBetween>
                  <Divider color={colors.secondary[100]} />
-            {/* {isLoggedIn ? ( */}
+            {isLoggedIn ? (
 
                  <List>
                    {navConfig.map(({ text, icon, to }) => {
@@ -262,10 +267,12 @@ export default function Nav({
                      );
                    })}
                  </List>
-                   {/* ) : (
+                   ) : (
                     // User does not have a valid JWT token, display the registration button
                     renderRegistrationButton()
-                  )} */}
+                  )}
+           <Divider color={colors.secondary[100]} />
+
                </Box>
           
           </Scrollbar>

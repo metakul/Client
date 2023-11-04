@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Typography, IconButton } from "@mui/material";
 import { ChevronLeft } from "@mui/icons-material";
-import CloseFullscreenOutlinedIcon from "@mui/icons-material/CloseFullscreenOutlined";
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 // Define a styled component for the user information section
 const UserInfoBox = styled(Box)(({ theme, colors }) => ({
   display: "flex",
@@ -45,7 +45,7 @@ const UserSubtitle = styled(Typography)(({ colors }) => ({
 }));
 const CloseIconButton = styled(IconButton)(({ theme, colors }) => ({
   zIndex: 9999, // Adjust the z-index value as needed
-  marginLeft: "26px",
+  marginLeft: "10px",
   color: colors.secondary[200],
   "&:hover": {
     backgroundColor: "transparent",
@@ -74,7 +74,7 @@ export default function UserInfo({
           setIsSidebarOpen(!isSidebarOpen);
         }}
       >
-        <CloseFullscreenOutlinedIcon sx={{ color: colors.secondary[100] }} />
+        <CloseOutlinedIcon sx={{ color: colors.secondary[100] }} />
       </CloseIconButton>
     </UserInfoBox>
   );

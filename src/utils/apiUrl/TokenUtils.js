@@ -38,7 +38,6 @@ export const setAccessTokenInCookie = (accessToken) => {
 
 // Function to retrieve access token from cookies
 export const getAccessTokenFromCookie = async () => {
-  console.log(laundryBaseURL)
   let accessToken = Cookies.get('accessToken');
 
   if (accessToken) {

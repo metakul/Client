@@ -13,11 +13,13 @@ import {
 import { FetchMynfts } from '../../utils/apiUrl/contracts/Get/getApi';
 import TransferNFTDialog from './TransferNft';
 import loadingGif from '../../assets/gif/loading_24.gif'; // Import the loading GIF
-
+import { TransferNFT } from '../../utils/apiUrl/erc721/Post/PostApi';
+import { toast } from 'react-hot-toast';
 const MyNFT = () => {
   const [nfts, setNFTs] = useState([]);
   const [isTransferDialogOpen, setTransferDialogOpen] = useState(false);
   const [loading, setLoading] = useState(true); // Add a loading state
+  const [transferDialogTokenID, setTransferDialogTokenID] = useState(null);
 
   useEffect(() => {
     const fetchNFTs = async () => {
@@ -39,17 +41,29 @@ const MyNFT = () => {
     window.open(externalUrl, '_blank');
   };
 
-  const handleOpenTransferDialog = () => {
+  const handleOpenTransferDialog = (tokenID) => {
     setTransferDialogOpen(true);
+    setTransferDialogTokenID(tokenID)
   };
 
   const handleCloseTransferDialog = () => {
     setTransferDialogOpen(false);
   };
 
-  const handleTransferNFT = (recipientAddress, password) => {
-    console.log('Transfer NFT to:', recipientAddress);
-    console.log('Password:', password);
+  const handleTransferNFT = async (receiverAddress, password, tokenID) => {
+    try {
+        console.log(receiverAddress,tokenID)
+      const response = await TransferNFT(receiverAddress, password, tokenID);
+
+      if (response.status === 200) {
+        toast.success('NFT transfer successful');
+      } else {
+        toast.error('NFT transfer failed');
+      }
+    } catch (error) {
+        console.log(error)
+        toast.error('NFT transfer failed');
+    }
   };
 
   return (
@@ -110,14 +124,14 @@ const MyNFT = () => {
                         </Button>
                       </Box>
                       <Box sx={{ mt: 1 }}>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          fullWidth
-                          onClick={handleOpenTransferDialog}
-                        >
-                          Transfer NFT
-                        </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  fullWidth
+                  onClick={() => handleOpenTransferDialog(nft.metadata.id)}
+                >
+                  Transfer NFT
+                </Button>
                       </Box>
                     </CardContent>
                   </Card>
@@ -127,11 +141,13 @@ const MyNFT = () => {
           </Container>
         </Box>
       )}
+   
       <TransferNFTDialog
-        open={isTransferDialogOpen}
-        onClose={handleCloseTransferDialog}
-        onTransfer={handleTransferNFT}
-      />
+  open={isTransferDialogOpen}
+  onClose={handleCloseTransferDialog}
+  onTransfer={handleTransferNFT}
+  tokenID={transferDialogTokenID} // Pass the tokenID here
+/>
     </>
   );
 };

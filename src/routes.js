@@ -17,6 +17,7 @@ import ProductsView from './pages/ProductShopping';
 import Register from './pages/AuthPage/Register';
 import Wallet from "./pages/Wallet"
 import CreateOrder from "./pages/CreateOrder"
+import Staking from './pages/Staking';
 
 export default function Router() {
 
@@ -86,6 +87,13 @@ export default function Router() {
             element:<DashboardLayout />,
             children:[
                 { path: '', element: <Laundry /> },
+            ]
+        },
+        {
+            path: '/Staking', 
+            element:<DashboardLayout />,
+            children:[
+                { path: '', element: <Staking /> },
             ]
         },
         {
