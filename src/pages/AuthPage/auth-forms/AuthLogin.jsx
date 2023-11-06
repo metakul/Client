@@ -54,7 +54,7 @@ const AuthLogin = () => {
       if (response.status === 200) {
         // Redirect to the dashboard page after login
         // Assuming a successful login would return a token
-        navigate("/"); // Import navigate function from your routing library
+        navigate("/wallet"); // Import navigate function from your routing library
         // toast.success(response.data.message); // Import toast function for displaying messages
       }
     } catch (error) {
