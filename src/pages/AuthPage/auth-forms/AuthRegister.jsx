@@ -33,20 +33,29 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
 // Import your API URL function for user registration
 import { registerUser } from '../../../utils/apiUrl/apiUrl';
+
 const AuthRegister = () => {
-  const navigate=useNavigate
+  const navigate = useNavigate();
   const [level, setLevel] = useState();
+  const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+    password: '',
+  });
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     company: '',
     password: '',
-    phoneNumber:'1234567890',
-    user_country:'INDIA'
+    phoneNumber: '1234567890',
+    user_country: 'INDIA',
   });
-  const [error, setError] = useState('');
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -55,40 +64,70 @@ const AuthRegister = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
   const changePassword = (value) => {
     const temp = strengthIndicator(value);
     setLevel(strengthColor(temp));
   };
 
-  const handleFormSubmit = async () => {
-    try {
-      console.log(formData)
-      // Simulate form submission for the example
-      const response = await registerUser(formData); // Use your API URL function here
-      console.log(response);
 
-      if (response.status === 201) {
-        setFormData({
+  const handleFormSubmit = async () => {
+    const newErrors = {};
+
+    // Check if any form field is empty and update error state
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First Name is required';
+    }
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last Name is required';
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    }
+
+    if (!formData.password.trim()) {
+      newErrors.password = 'Password is required';
+    }
+
+    if (Object.keys(newErrors).length === 0) {
+      // Only proceed with the submission if there are no errors
+      try {
+        setIsLoading(true);
+        setErrors({
           firstName: '',
           lastName: '',
           email: '',
           company: '',
           password: '',
-          phoneNumber: '1234567890',
-          user_country: 'INDIA',
-        });
-  
-       
-        toast.success("Registered SuccessFully"); // Import toast function for displaying messages
+        })
+
+        const response = await registerUser(formData);
+
+        if (response.status === 201) {
+          setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            company: '',
+            password: '',
+            phoneNumber: '1234567890',
+            user_country: 'INDIA',
+          });
+
+          toast.success('Registered Successfully');
+          setError('')
+        }
+      } catch (err) {
+        if (err.response.status) {
+          setError(err.response.data.error);
+        } else {
+          setError('Unknown Error. Join discord to get help.');
+        }
+      } finally {
+        setIsLoading(false);
       }
-    } catch (err) {
-      if (err.resposne) {
-        // toast.error(err.response.data.error);
-        setError(err.response.data.error);
-      } else {
-        console.log('Unknown Error',err);
-      }
+    } else {
+      // Update the error state with newErrors
+      setErrors(newErrors);
     }
   };
 
@@ -106,11 +145,11 @@ const AuthRegister = () => {
                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                 placeholder="John"
                 fullWidth
-                error={error.includes('firstName')}
+                error={Boolean(errors.firstName)}
               />
-              {error.includes('firstName') && (
+              {errors.firstName && (
                 <FormHelperText error id="helper-text-firstName-signup">
-                  {error}
+                  {errors.firstName}
                 </FormHelperText>
               )}
             </Stack>
@@ -120,36 +159,38 @@ const AuthRegister = () => {
               <InputLabel htmlFor="lastName-signup">Last Name*</InputLabel>
               <OutlinedInput
                 fullWidth
-                error={error.includes('lastName')}
                 id="lastName-signup"
                 type="lastName"
                 value={formData.lastName}
                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                 placeholder="Doe"
                 inputProps={{}}
+                error={Boolean(errors.lastName)}
               />
-              {error.includes('lastName') && (
+              {errors.lastName && (
                 <FormHelperText error id="helper-text-lastName-signup">
-                  {error}
+                  {errors.lastName}
                 </FormHelperText>
               )}
             </Stack>
           </Grid>
           <Grid item xs={12}>
             <Stack spacing={1}>
-              <InputLabel htmlFor="company-signup">Company</InputLabel>
+              <InputLabel htmlFor="company-signup">University or Company Name</InputLabel>
               <OutlinedInput
                 fullWidth
-                error={error.includes('company')}
                 id="company-signup"
                 value={formData.company}
                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                placeholder="Demo Inc."
-                inputProps={{}}
+                placeholder="GBPIET / Demo Inc"
+                inputProps={{
+                  required: true,
+                }}
+                error={Boolean(errors.company)}
               />
-              {error.includes('company') && (
+              {errors.company && (
                 <FormHelperText error id="helper-text-company-signup">
-                  {error}
+                  {errors.company}
                 </FormHelperText>
               )}
             </Stack>
@@ -159,27 +200,26 @@ const AuthRegister = () => {
               <InputLabel htmlFor="email">Email Address*</InputLabel>
               <OutlinedInput
                 fullWidth
-                error={error.includes('email')}
                 id="email"
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                placeholder="demo@company.com"
+                placeholder="demo@metakul.com"
                 inputProps={{}}
+                error={Boolean(errors.email)}
               />
-              {error.includes('email') && (
+              {errors.email && (
                 <FormHelperText error id="helper-text-email-signup">
-                  {error}
+                  {errors.email}
                 </FormHelperText>
               )}
             </Stack>
           </Grid>
           <Grid item xs={12}>
             <Stack spacing={1}>
-              <InputLabel htmlFor="password-signup">Password</InputLabel>
+              <InputLabel htmlFor="password-signup">Password*</InputLabel>
               <OutlinedInput
                 fullWidth
-                error={error.includes('password')}
                 id="password-signup"
                 type={showPassword ? 'text' : 'password'}
                 value={formData.password}
@@ -202,10 +242,11 @@ const AuthRegister = () => {
                 }
                 placeholder="******"
                 inputProps={{}}
+                error={Boolean(errors.password)}
               />
-              {error.includes('password') && (
+              {errors.password && (
                 <FormHelperText error id="helper-text-password-signup">
-                  {error}
+                  {errors.password}
                 </FormHelperText>
               )}
             </Stack>
@@ -234,11 +275,14 @@ const AuthRegister = () => {
               </Link>
             </Typography>
           </Grid>
-          {error && (
-            <Grid item xs={12}>
+          <Grid item xs={12}>
+            {isLoading ? (
+              <Typography variant="body2">Creating Account...</Typography>
+            ) : (
               <FormHelperText error>{error}</FormHelperText>
-            </Grid>
-          )}
+            )}
+          </Grid>
+
           <Grid item xs={12}>
             <AnimateButton>
               <Button
@@ -249,7 +293,7 @@ const AuthRegister = () => {
                 variant="contained"
                 color="primary"
               >
-                Create Account
+                {isLoading ? 'Creating Account...' : 'Create Account'}
               </Button>
             </AnimateButton>
           </Grid>

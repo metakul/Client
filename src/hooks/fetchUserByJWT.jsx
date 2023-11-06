@@ -12,7 +12,6 @@ const useFetchUserByUsername = () => {
     if (accessToken) {
       try {
         const decodedToken = jwt_decode(accessToken);
-        console.log(decodedToken)
         // Check if the decoded token contains user data
         if (decodedToken && decodedToken.user_type) {
           // Set the user data to setData
@@ -23,7 +22,6 @@ const useFetchUserByUsername = () => {
       }
     }
   }, []); 
-  console.log(data)
   return { data };
 };
 

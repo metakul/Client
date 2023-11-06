@@ -27,21 +27,20 @@ export const navConfig = [
       to: "NFT",
     },
     {
-      text: "NFT",
-      icon: <ShoppingCartOutlined />,
-      to: "NFT",
+      text: "My Wallet",
+      icon: <TodayOutlined />,
+      to: "wallet",
+    },
+    {
+      text: "NFT Staking",
+      icon: <PieChartOutlined />,
+      to: "Staking",
     },
     {
       text: "Metakul Collection",
       icon: <TodayOutlined />,
       to: "metakulNFT",
     },
-    {
-      text: "Marketplace",
-      icon: <ReceiptLongOutlined />,
-      to: "marketplace",
-    },
-
     {
       text: "Utilities",
       icon: null,
@@ -53,19 +52,26 @@ export const navConfig = [
       to: "Laundry",
     },
     {
-      text: "NFT Staking",
-      icon: <PieChartOutlined />,
-      to: "Staking",
+      text: "NFT",
+      icon: <ShoppingCartOutlined />,
+      to: "NFT",
+    },
+
+    {
+      text: "Marketplace",
+      icon: <ReceiptLongOutlined />,
+      to: "marketplace",
+    },
+
+    {
+      text: "Extras",
+      icon:null,
+      to: "",
     },
     {
       text: "Profile",
       icon: <AdminPanelSettingsOutlined />,
       to: "Profile",
-    },
-    {
-      text: "Extras",
-      icon:null,
-      to: "",
     },
     {
       text: "KYC",
@@ -77,6 +83,7 @@ export const navConfig = [
       icon: <CalendarMonthOutlined />,
       to: "Career",
     },
+    
   ];
 
   export default navConfig;

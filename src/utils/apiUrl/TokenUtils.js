@@ -50,6 +50,7 @@ export const getAccessTokenFromCookie = async () => {
       const newAccessToken=await refreshAccessToken()
       accessToken=newAccessToken;
       setAccessTokenInCookie(accessToken);
+      console.log("new access Token set")
     } else {
       setAccessTokenInCookie(accessToken);
       console.log("Access token is not expired");

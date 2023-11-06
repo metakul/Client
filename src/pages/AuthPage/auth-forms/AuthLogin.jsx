@@ -32,8 +32,8 @@ const AuthLogin = () => {
   const navigate=useNavigate()
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('info@codedthemes.com');
-  const [password, setPassword] = useState('123456');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleClickShowPassword = () => {
@@ -138,7 +138,7 @@ const AuthLogin = () => {
                 }
                 label={<Typography variant="h6">Keep me sign in</Typography>}
               />
-              <Link variant="h6" component={RouterLink} to="" color="text.primary">
+              <Link variant="h6" component={RouterLink} target="_blank" to="https://discord.gg/cAtWtdxnEt" color="text.primary">
                 Forgot Password?
               </Link>
             </Stack>

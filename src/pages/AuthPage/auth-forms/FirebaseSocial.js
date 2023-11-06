@@ -1,3 +1,4 @@
+import { useState } from 'react';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery, Button, Stack } from '@mui/material';
@@ -5,22 +6,34 @@ import { useMediaQuery, Button, Stack } from '@mui/material';
 // assets
 import GTranslateOutlinedIcon from '@mui/icons-material/GTranslateOutlined';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import MetaMaskIcon from '../../../assets/walletIcon/metamask.png'; 
+
 // ==============================|| FIREBASE - SOCIAL BUTTON ||============================== //
+import ConnectWallet from './ConnectWallet';
+import { tokens } from '../../../theme';
 
 const FirebaseSocial = () => {
   const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const matchDownSM = useMediaQuery(theme.breakpoints.down('sm'));
+  const [openConnectWallet, setOpenConnectWallet] = useState(false);
 
   const googleHandler = async () => {
-    // login || singup
+    setOpenConnectWallet(true);
   };
 
   const twitterHandler = async () => {
-    // login || singup
+    setOpenConnectWallet(true);
+    
   };
 
   const facebookHandler = async () => {
-    // login || singup
+    setOpenConnectWallet(true);
+
+  };
+  const handleCloseConnectWallet = () => {
+    setOpenConnectWallet(false);
   };
 
   return (
@@ -39,7 +52,7 @@ const FirebaseSocial = () => {
         variant="outlined"
         color="secondary"
         fullWidth={!matchDownSM}
-        startIcon={<img src={"https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-logos-vector-eps-cdr-svg-download-10.png"} alt="Google" />}
+        startIcon={<img src={MetaMaskIcon} alt="Google" />}
         onClick={googleHandler}
       >
         
@@ -66,11 +79,12 @@ const FirebaseSocial = () => {
         variant="outlined"
         color="secondary"
         fullWidth={!matchDownSM}
-        startIcon={<img src={"https://www.freepnglogos.com/uploads/facebook-logo-23.jpg"} alt="Facebook" />}
+        startIcon={<img src={"https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-logos-vector-eps-cdr-svg-download-10.png"} alt="Facebook" />}
         onClick={facebookHandler}
       >
         {/* {!matchDownSM && 'Facebook'} */}
       </Button>
+      <ConnectWallet  colors={colors} open={openConnectWallet} onClose={handleCloseConnectWallet} />
     </Stack>
   );
 };

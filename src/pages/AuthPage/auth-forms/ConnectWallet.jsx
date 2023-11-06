@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, Typography, Button, Box, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
-import coinbase from '../../../../assets/walletIcon/coinbase.svg'; 
-import walletConnect from '../../../../assets/walletIcon/walletConnect.svg'; 
-import MetaMaskIcon from '../../../../assets/walletIcon/metamask.png'; 
+import coinbase from '../../../assets/walletIcon/coinbase.svg'; 
+import walletConnect from '../../../assets/walletIcon/walletConnect.svg'; 
+import MetaMaskIcon from '../../../assets/walletIcon/metamask.png'; 
 
 const ConnectWallet = ({ open, onClose ,colors }) => {
   return (

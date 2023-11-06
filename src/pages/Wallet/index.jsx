@@ -74,8 +74,8 @@ const CustomizedTabs = () => {
   
       <Box sx={{ margin: 2, display:"flex", justifyContent:"center", }} >
         <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs">
-          <StyledTab label="Crypto" />
-          <StyledTab label="NFTs" />
+          <StyledTab label="My NFTs" />
+          <StyledTab label="My Crypto" />
           <StyledTab label="Activity" />
         </StyledTabs>
       </Box>

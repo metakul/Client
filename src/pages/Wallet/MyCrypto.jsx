@@ -17,9 +17,9 @@ import { Box } from '@mui/material';
 import { sendErc20Token } from '../../utils/apiUrl/erc20/Post/PostApi';
 
 const mockCryptoBalances = [
-    { id: 1, symbol: "BTC", balance: "0.00" },
+    { id: 1,symbol: "$KULL", balance: null  },
     { id: 2, symbol: "MATIC", balance: null },
-    { id: 3, symbol: "$KULL", balance: null }, // Initially set the balance to null
+    { id: 3, symbol: "BTC", balance: "0.00"}, // Initially set the balance to null
 ];
 
 
@@ -65,11 +65,11 @@ export default function CryptoWallet() {
     }, []);
 
     const getIcon = (symbol) => {
-        if (symbol === "BTC") {
+        if (symbol === "$KULL") {
             return <ImageIcon />;
         } else if (symbol === "MATIC") {
             return <WorkIcon />;
-        } else if (symbol === "$KULL") {
+        } else if (symbol === "BTC") {
             return <BeachAccessIcon />;
         }
         return null;

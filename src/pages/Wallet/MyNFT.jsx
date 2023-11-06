@@ -8,17 +8,19 @@ import {
   CardContent,
   CardMedia,
   Button,
-  Backdrop
+  Backdrop,
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom'; // Import RouterLink
 import { FetchMynfts } from '../../utils/apiUrl/contracts/Get/getApi';
 import TransferNFTDialog from './TransferNft';
-import loadingGif from '../../assets/gif/loading_24.gif'; // Import the loading GIF
+import loadingGif from '../../assets/gif/loading_24.gif';
 import { TransferNFT } from '../../utils/apiUrl/erc721/Post/PostApi';
 import { toast } from 'react-hot-toast';
+
 const MyNFT = () => {
   const [nfts, setNFTs] = useState([]);
   const [isTransferDialogOpen, setTransferDialogOpen] = useState(false);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
   const [transferDialogTokenID, setTransferDialogTokenID] = useState(null);
 
   useEffect(() => {
@@ -27,10 +29,10 @@ const MyNFT = () => {
         const response = await FetchMynfts();
         console.log('NFTs:', response);
         setNFTs(response.data);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching NFTs:', error);
-        setLoading(false); // Set loading to false in case of an error
+        setLoading(false);
       }
     };
 
@@ -43,7 +45,7 @@ const MyNFT = () => {
 
   const handleOpenTransferDialog = (tokenID) => {
     setTransferDialogOpen(true);
-    setTransferDialogTokenID(tokenID)
+    setTransferDialogTokenID(tokenID);
   };
 
   const handleCloseTransferDialog = () => {
@@ -52,7 +54,6 @@ const MyNFT = () => {
 
   const handleTransferNFT = async (receiverAddress, password, tokenID) => {
     try {
-        console.log(receiverAddress,tokenID)
       const response = await TransferNFT(receiverAddress, password, tokenID);
 
       if (response.status === 200) {
@@ -61,29 +62,28 @@ const MyNFT = () => {
         toast.error('NFT transfer failed');
       }
     } catch (error) {
-        console.log(error)
-        toast.error('NFT transfer failed');
+      console.log(error);
+      toast.error('NFT transfer failed');
     }
   };
 
   return (
     <>
-    
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            py: 8,
-          }}
-        >
-          <Container maxWidth="lg">
-            <Typography variant="h4" gutterBottom>
-              My NFTs
-            </Typography>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8,
+        }}
+      >
+        <Container maxWidth="lg">
+          <Typography variant="h4" gutterBottom>
+            My NFTs
+          </Typography>
 
-              {loading ? (
-        <img src={loadingGif} alt="Loading..." />
-      ) : (
+          {loading ? (
+            <img src={loadingGif} alt="Loading..." />
+          ) : nfts.length > 0 ? (
             <Grid container spacing={3}>
               {nfts.map((nft, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
@@ -118,37 +118,53 @@ const MyNFT = () => {
                           variant="contained"
                           color="primary"
                           fullWidth
-                          onClick={() => handleViewOnOpenSea(`https://opensea.io/assets/matic/0x710e9161e8a768c0605335ab632361839f761374/${nft.metadata.id}`)}
+                          onClick={() =>
+                            handleViewOnOpenSea(
+                              `https://opensea.io/assets/matic/0x710e9161e8a768c0605335ab632361839f761374/${nft.metadata.id}`
+                            )
+                          }
                         >
                           View on OpenSea
                         </Button>
                       </Box>
                       <Box sx={{ mt: 1 }}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  fullWidth
-                  onClick={() => handleOpenTransferDialog(nft.metadata.id)}
-                >
-                  Transfer NFT
-                </Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          fullWidth
+                          onClick={() => handleOpenTransferDialog(nft.metadata.id)}
+                        >
+                          Transfer NFT
+                        </Button>
                       </Box>
                     </CardContent>
                   </Card>
                 </Grid>
               ))}
             </Grid>
-      )}
+          ) : (
+            <Typography variant="body1">
+              No NFT claimed yet. Visit{' '}
+              <Button
+                component={RouterLink}
+                to="/nft"
+                variant="contained"
+                color="primary"
+              >
+                Claim NFT
+              </Button>{' '}
+              page to claim your free NFT.
+            </Typography>
+          )}
+        </Container>
+      </Box>
 
-          </Container>
-        </Box>
-   
       <TransferNFTDialog
-  open={isTransferDialogOpen}
-  onClose={handleCloseTransferDialog}
-  onTransfer={handleTransferNFT}
-  tokenID={transferDialogTokenID} // Pass the tokenID here
-/>
+        open={isTransferDialogOpen}
+        onClose={handleCloseTransferDialog}
+        onTransfer={handleTransferNFT}
+        tokenID={transferDialogTokenID}
+      />
     </>
   );
 };

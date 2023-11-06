@@ -31,18 +31,18 @@ export const Roadmap = ({ onClose }) => {
                                                 <p>10%</p>
                                             </div>
                                             <p>
-                                                1.Building something with Culture, Food & Technology.
+                                                1.Building something with Technology,Free Education via Vedic system & For Friends.
                                             </p>
                                             <p>
-                                                2.Kickoff & Concept Creation with The Sushies.
+                                                2.Kickoff & Concept Creation with The Metakul.
                                             </p>
                                             <p>
 
-                                                3.Getting Idea from own Restaurent.
+                                                3.Getting Idea from own College.
 
                                             </p>
                                             <p>
-                                                4. Onboarding Co-Founders and Investors.
+                                                4. Onboarding Co-Founders and Developing Ideas.
                                             </p>
                                         </div>
                                     </div>
@@ -130,13 +130,11 @@ export const Roadmap = ({ onClose }) => {
                                                 1.  Pre_sale for WL Users.
                                             </p>
                                             <p>
-                                                2. Introduce $SUSHI ,our Utility Token.
+                                                2. Introduce $KULL ,our Utility Token.
                                             </p>
+                                            
                                             <p>
-                                                3.  Launching Staking Dashboard of NFT's.
-                                            </p>
-                                            <p>
-                                                4.  Open Live Mint for Public.
+                                                3.  Open Live Mint for Public.
                                             </p>
                                         </div>
                                     </div>
@@ -169,16 +167,16 @@ export const Roadmap = ({ onClose }) => {
                                                 <p>60%</p>
                                             </div>
                                             <p>
-                                                1. Providing Weekly Free Food to Holders
+                                                1. Providing Weekly Free Utilities to Holders
                                             </p>
                                             <p>
-                                                2. Opening of Shoping website to shop via earned $SUSHI.
+                                                2. Opening of Shoping website to shop via earned $KULL.
                                             </p>
                                             <p>
-                                                3.  Start ICO sale of $SUSHI.
+                                                3.  Launching Staking Dashboard of NFT's.
                                             </p>
                                             <p>
-                                                4. Buying/Selling $SUSHI on exchanges.
+                                                4. Buying/Selling $KULL on exchanges.
                                             </p>
                                         </div>
 
@@ -211,10 +209,11 @@ export const Roadmap = ({ onClose }) => {
                                                 <h4 >Launching Metaverse  (Q4 2023) </h4>
                                                 <p>80%</p>
                                             </div>
-                                            <p>1. First Experience for holder in The Sushie Metaverse.</p>
-                                            <p>2. Going out for direct public Sale for metaverse land.</p>
-                                            <p>3. Airdrop of Metaverse land to lucky 122 NFT's hodlers.</p>
-                                            <p>4. Launching Own Nft Marketplace.</p>
+                                            <p>1. First Experience for holder in The Metakul Metaverse in Unreal Engine.</p>
+                                            <p>2. Public Sale for metaverse land.</p>
+                                            <p>3. Airdrop of Metaverse land to 777 NFT's hodlers.</p>
+                                            <p>4. Launching Own Mixed Reality(MR) Experience.</p>
+                                            
 
                                         </div>
 

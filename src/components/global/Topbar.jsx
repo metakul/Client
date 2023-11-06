@@ -121,7 +121,6 @@ const Topbar = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(user)
 
 
   useEffect(() => {
@@ -138,7 +137,6 @@ const Topbar = ({
           toast.success("Copied");
         })
         .catch((error) => {
-          console.error("Error copying address:", error);
           toast.error("Copy failed");
         });
       // Reset the animation after a brief delay

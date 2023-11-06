@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import {
+    Box,
   Container,
   styled,
   Grid,
-  useMediaQuery,
   Button,
   Dialog,
   DialogTitle,
   DialogContent,
+  DialogActions,
+  TextField,
+  CircularProgress,
   Typography,
-  useTheme,
 } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -17,26 +19,18 @@ import CardMedia from '@mui/material/CardMedia';
 import loadingGif from '../../assets/gif/loading_24.gif';
 import { FetchMynfts } from '../../utils/apiUrl/contracts/Get/getApi';
 import { useNavigate } from 'react-router-dom';
+import { stakeNFT } from '../../utils/apiUrl/erc721/Post/PostApi';
 
-// Define styled components
 const NFTCard = styled(Card)(({ theme }) => ({
   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
   margin: '0 1rem 1rem 0',
   maxWidth: '70%',
   marginLeft: 'auto',
   marginRight: 'auto',
-  [theme.breakpoints.down('sm')]: {
-    maxWidth: '70%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
 }));
 
 const Image = styled(CardMedia)(({ theme }) => ({
   paddingTop: '100%',
-  [theme.breakpoints.down('sm')]: {
-    paddingTop: '100%',
-  },
 }));
 
 const NFTName = styled(Typography)({
@@ -71,37 +65,66 @@ const Staking = () => {
   const navigate = useNavigate();
   const [mynfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const theme = useMediaQuery('(max-width:600px)') ? 'sm' : 'md';
   const [openStakeDialog, setOpenStakeDialog] = useState(false);
+  const [selectedNFT, setSelectedNFT] = useState(null);
+  const [password, setPassword] = useState('');
+  const [confirmation, setConfirmation] = useState('');
+  const [isStaking, setStaking] = useState(false);
+  const [stakingSuccess, setStakingSuccess] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      FetchMynfts()
-        .then((response) => {
-          if (response.data && response.data.length > 0) {
-            setNfts(response.data);
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching NFTs:', error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 2000);
+    FetchMynfts()
+      .then((response) => {
+        if (response.data && response.data.length > 0) {
+          setNfts(response.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching NFTs:', error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   const openWallet = () => {
     navigate('/wallet');
   };
 
-  const openStakeDialogNow = () => {
+  const openStakeDialogNow = (nft) => {
+    setSelectedNFT(nft);
     setOpenStakeDialog(true);
   };
 
   const closeStakeDialog = () => {
+    setSelectedNFT(null);
     setOpenStakeDialog(false);
   };
+
+  const handleStakeNFT = async () => {
+    setStaking(true);
+    try {
+      if (password === confirmation) {
+        console.log(selectedNFT.metadata.id,password)
+        
+        const response = await stakeNFT(selectedNFT.metadata.id, password);
+        console.log(response)
+        if (response.status === 200) {
+          // Staking successful
+          setStakingSuccess(true);
+        } else {
+          // Staking failed
+          console.error('Staking failed:', response.data.message);
+        }
+      }
+    } catch (error) {
+      // Handle errors as needed
+      console.error('Error while staking:', error);
+    } finally {
+      setStaking(false);
+    }
+  };
+  
 
   return (
     <Container>
@@ -120,7 +143,7 @@ const Staking = () => {
                   <Image image={nft.metadata.image} title={nft.metadata.name} />
                   <CardContent>
                     <NFTName>{nft.metadata.name}</NFTName>
-                    <StakeButton onClick={openStakeDialogNow}>Stake NFT</StakeButton>
+                    <StakeButton onClick={() => openStakeDialogNow(nft)}>Stake NFT</StakeButton>
                   </CardContent>
                 </NFTCard>
               </Grid>
@@ -128,17 +151,43 @@ const Staking = () => {
           </Grid>
         </>
       )}
-      <Dialog
-        open={openStakeDialog}
-        onClose={closeStakeDialog}
-        fullWidth
-        maxWidth="sm"
-      >
+      <Dialog open={openStakeDialog} onClose={closeStakeDialog} fullWidth maxWidth="sm">
         <DialogTitle>Stake NFT</DialogTitle>
         <DialogContent>
-          <Typography>
-            Staking will soon be enabled for all users.
-          </Typography>
+          {stakingSuccess ? (
+            <Typography variant="h6">Staking Successful</Typography>
+          ) : (
+            <>
+              <TextField
+                label="Password"
+                type="password"
+                fullWidth
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                margin="normal"
+              />
+              <TextField
+                label="Confirm Password"
+                type="password"
+                fullWidth
+                value={confirmation}
+                onChange={(e) => setConfirmation(e.target.value)}
+                margin="normal"
+              />
+              {isStaking ? (
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <CircularProgress />
+                  <Typography>Staking in progress...</Typography>
+                </Box>
+              ) : (
+                <DialogActions>
+                  <Button onClick={handleStakeNFT} color="primary" variant="contained">
+                    Stake
+                  </Button>
+                </DialogActions>
+              )}
+            </>
+          )}
         </DialogContent>
       </Dialog>
     </Container>
