@@ -10,7 +10,7 @@ import {
   Button,
   Backdrop,
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom'; // Import RouterLink
+import { Link as RouterLink } from 'react-router-dom';
 import { FetchMynfts } from '../../utils/apiUrl/contracts/Get/getApi';
 import TransferNFTDialog from './TransferNft';
 import loadingGif from '../../assets/gif/loading_24.gif';
@@ -104,7 +104,7 @@ const MyNFT = () => {
                     <CardMedia
                       component="img"
                       height="140"
-                      image={nft.metadata.image}
+                      src={nft.metadata.image} // Load the image from the local cache
                       alt={nft.metadata.name}
                       sx={{
                         objectFit: 'contain',

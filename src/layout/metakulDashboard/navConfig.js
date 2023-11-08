@@ -22,9 +22,9 @@ export const navConfig = [
       to: "",
     },
     {
-      text: "Metaverse",
+      text: "Introduction",
       icon: null,
-      to: "NFT",
+      to: "",
     },
     {
       text: "My Wallet",
@@ -37,19 +37,20 @@ export const navConfig = [
       to: "Staking",
     },
     {
+      text: "Book Laundry",
+      icon: <PieChartOutlined />,
+      to: "Laundry",
+    },
+
+    {
+      text: "Metaverse",
+      icon: null,
+      to: "",
+    },
+    {
       text: "Metakul Collection",
       icon: <TodayOutlined />,
       to: "metakulNFT",
-    },
-    {
-      text: "Utilities",
-      icon: null,
-      to: "NFT",
-    },
-    {
-      text: "Laundry",
-      icon: <PieChartOutlined />,
-      to: "Laundry",
     },
     {
       text: "NFT",

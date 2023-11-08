@@ -30,3 +30,14 @@ export const registerUser = async (data) => {
     throw error;
   }
 };
+export const sendOTP = async (data) => {
+  try {
+    const response = await authApi.post("/sendOtp", {
+      email:data.email,
+    }, {});
+    return response;
+  } catch (error) {
+    console.log(error)
+    throw error;
+  }
+};

@@ -19,7 +19,7 @@ const Login = () => (
             <AnimateButton>
 
 
-              <Typography  variant="body1" sx={{ textDecoration: 'none' }} color="secondary">
+              <Typography variant="body1" sx={{ textDecoration: 'none' }} color="secondary">
                 Don&apos;t have an account?
 
               </Typography>

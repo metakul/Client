@@ -1,39 +1,13 @@
 import React, { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-
-// material-ui
-import {
-  Container,
-  Box,
-  Button,
-  Divider,
-  FormControl,
-  FormHelperText,
-  Grid,
-  Link,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Container, Box, Button, Divider, FormHelperText, Grid, Link, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, Typography, FormControl } from '@mui/material';
 import toast from 'react-hot-toast';
-
-
-// project import
-import FirebaseSocial from './FirebaseSocial';
-import AnimateButton from '../../../components/@extended/AnimateButton';
-
 import { strengthColor, strengthIndicator } from '../../../utils/password-strength';
-
-// assets
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-
-// Import your API URL function for user registration
-import { registerUser } from '../../../utils/apiUrl/apiUrl';
-
+import { registerUser, sendOTP } from '../../../utils/apiUrl/apiUrl';
+import FirebaseSocial from './FirebaseSocial';
+import AnimateButton from '../../../components/@extended/AnimateButton';
 const AuthRegister = () => {
   const navigate = useNavigate();
   const [level, setLevel] = useState();
@@ -55,7 +29,9 @@ const AuthRegister = () => {
     password: '',
     phoneNumber: '1234567890',
     user_country: 'INDIA',
+    otp: '', // Add an OTP field
   });
+  const [otpSent, setOtpSent] = useState(false); // Track OTP sending status
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -64,11 +40,34 @@ const AuthRegister = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  
   const changePassword = (value) => {
     const temp = strengthIndicator(value);
     setLevel(strengthColor(temp));
   };
 
+  const handleSendOTP = async () => {
+    try {
+      setIsLoading(true);
+      // Check if the email field is empty
+      if (!formData.email.trim()) {
+        setError('Email is required');
+        setIsLoading(false);
+        return;
+      }
+
+      // Send OTP to the email
+      const sendOtpNow = await sendOTP(formData.email);
+      console.log(sendOtpNow);
+      setOtpSent(true);
+      setError('');
+      toast.success('OTP sent to your email');
+    } catch (err) {
+      setError('Failed to send OTP. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleFormSubmit = async () => {
     const newErrors = {};
@@ -82,6 +81,9 @@ const AuthRegister = () => {
     }
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
+    }
+    if (!otpSent) {
+      setError('Please send OTP first.');
     }
 
     if (!formData.password.trim()) {
@@ -98,8 +100,9 @@ const AuthRegister = () => {
           email: '',
           company: '',
           password: '',
-        })
+        });
 
+        // Perform OTP verification and user registration
         const response = await registerUser(formData);
 
         if (response.status === 201) {
@@ -111,10 +114,12 @@ const AuthRegister = () => {
             password: '',
             phoneNumber: '1234567890',
             user_country: 'INDIA',
+            otp: '', // Clear the OTP field
           });
 
           toast.success('Registered Successfully');
-          setError('')
+          setError('');
+          setOtpSent(false); // Reset the OTP sending status
         }
       } catch (err) {
         if (err.response.status) {
@@ -135,7 +140,7 @@ const AuthRegister = () => {
     <Container>
       <form noValidate>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} sm={6}>
             <Stack spacing={1}>
               <InputLabel htmlFor="firstName-signup">First Name*</InputLabel>
               <OutlinedInput
@@ -154,7 +159,7 @@ const AuthRegister = () => {
               )}
             </Stack>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} sm={6}>
             <Stack spacing={1}>
               <InputLabel htmlFor="lastName-signup">Last Name*</InputLabel>
               <OutlinedInput
@@ -196,24 +201,56 @@ const AuthRegister = () => {
             </Stack>
           </Grid>
           <Grid item xs={12}>
-            <Stack spacing={1}>
-              <InputLabel htmlFor="email">Email Address*</InputLabel>
-              <OutlinedInput
-                fullWidth
-                id="email"
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                placeholder="demo@metakul.com"
-                inputProps={{}}
-                error={Boolean(errors.email)}
-              />
-              {errors.email && (
-                <FormHelperText error id="helper-text-email-signup">
-                  {errors.email}
-                </FormHelperText>
-              )}
-            </Stack>
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="email">Email Address*</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="demo@metakul.com"
+                    inputProps={{}}
+                    error={Boolean(errors.email)}
+                  />
+                  {errors.email && (
+                    <FormHelperText error id="helper-text-email-signup">
+                      {errors.email}
+                    </FormHelperText>
+                  )}
+                </Stack>
+              </Grid>
+              <Grid item xs={4}>
+                {otpSent ? (
+                  <Stack spacing={1}>
+                    <InputLabel htmlFor="otp">OTP*</InputLabel>
+                    <OutlinedInput
+                      fullWidth
+                      id="otp"
+                      type="text"
+                      value={formData.otp}
+                      onChange={(e) => setFormData({ ...formData, otp: e.target.value })}
+                      placeholder="Enter OTP"
+                      inputProps={{}}
+                    />
+                  </Stack>
+                ) : (
+                  <Button
+                  fullWidth
+                  size="large"
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSendOTP}
+                  sx={{mt:4, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                >
+                  {isLoading ? 'Sending OTP...' : 'Send OTP'}
+                </Button>
+                
+                )}
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12}>
             <Stack spacing={1}>

@@ -67,9 +67,9 @@ export default function Info() {
         <CustomButton onClick={openRoadMapPopup}>
             Roadmap
           </CustomButton>
-          <CustomButton onClick={openTeamPopup}>
+          {/* <CustomButton onClick={openTeamPopup}>
             Team
-          </CustomButton>
+          </CustomButton> */}
         </Box>
       </Box>
       <div>

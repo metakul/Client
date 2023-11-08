@@ -3048,7 +3048,7 @@ ol {
 }
 
 .homeshowdiv { /* image is 460px x 460px */
-    width: 400px;
+    width: 300px;
     height: 10px; /* 50 divisions */
     background-image: url(https://media.discordapp.net/attachments/1069647894203875440/1069662812806336553/Untitled90_20230129190106.png?width=633&height=633);
     background-size: cover;

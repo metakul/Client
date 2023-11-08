@@ -16,7 +16,8 @@ const ConnectWallet = ({ open, onClose ,colors }) => {
       <Box
         sx={{
           position: 'absolute',
-          width: 400,
+          maxWidth: 600,
+          minWidth: 300,
           bgcolor: colors.primary[700], // Background with 80% opacity
           boxShadow: 100,
           p: 4,

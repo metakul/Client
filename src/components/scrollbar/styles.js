@@ -12,7 +12,7 @@ const customScrollbarStyles = {
     backgroundImage: 'url("https://i.ibb.co/5150925/tracks.png")',
     backgroundPosition: '-5px',
     backgroundRepeat: 'repeat-y',
-    backgroundSize: '50px',
+    backgroundSize: '35px',
   },
   '&::-webkit-scrollbar-thumb': {
     borderRadius: '8px',
