@@ -232,7 +232,7 @@ const AuthRegister = () => {
                       type="text"
                       value={formData.otp}
                       onChange={(e) => setFormData({ ...formData, otp: e.target.value })}
-                      placeholder="Enter OTP"
+                      placeholder="Enter Random otp for this testing phase"
                       inputProps={{}}
                     />
                   </Stack>
