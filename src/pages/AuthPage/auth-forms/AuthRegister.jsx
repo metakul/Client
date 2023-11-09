@@ -222,7 +222,7 @@ const AuthRegister = () => {
                   )}
                 </Stack>
               </Grid>
-              <Grid item xs={4}>
+              {/* <Grid item xs={4}>
                 {otpSent ? (
                   <Stack spacing={1}>
                     <InputLabel htmlFor="otp">OTP*</InputLabel>
@@ -249,7 +249,7 @@ const AuthRegister = () => {
                 </Button>
                 
                 )}
-              </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
           <Grid item xs={12}>
