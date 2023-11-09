@@ -82,9 +82,7 @@ const AuthRegister = () => {
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     }
-    if (!otpSent) {
-      setError('Please send OTP first.');
-    }
+   
 
     if (!formData.password.trim()) {
       newErrors.password = 'Password is required';
@@ -202,7 +200,7 @@ const AuthRegister = () => {
           </Grid>
           <Grid item xs={12}>
             <Grid container spacing={1}>
-              <Grid item xs={8}>
+              <Grid item xs={12}>
                 <Stack spacing={1}>
                   <InputLabel htmlFor="email">Email Address*</InputLabel>
                   <OutlinedInput
