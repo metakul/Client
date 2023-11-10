@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import { ColorModeContext, useMode,tokens } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
 
 // routes
 import Router from "./routes";
@@ -30,9 +31,9 @@ export default function App() {
               },
             }}
           />
-          <main className="content">
+          <BrowserRouter>
             <Router />
-          </main>
+          </BrowserRouter>
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
