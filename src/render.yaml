@@ -1,0 +1,10 @@
+services:
+  - name: web
+    type: web
+    buildCommand: npm run build
+    startCommand: npm start
+    routes:
+      - path: "/*"
+        headers:
+          - key: Cache-Control
+            value: public, max-age=0, must-revalidate
