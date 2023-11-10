@@ -31,7 +31,7 @@ export default function App() {
               },
             }}
           />
-          <BrowserRouter>
+          <BrowserRouter basename="/">
             <Router />
           </BrowserRouter>
         </div>
