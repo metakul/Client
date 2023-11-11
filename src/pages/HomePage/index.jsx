@@ -63,23 +63,22 @@ const HomePage = () => {
           Welcome to Meta-kul Metaverse
         </Typography>
         <Typography variant="body1">
-          Meta-kul is a metaverse-based NFT project aimed at spreading awareness of blockchain WEB 3.0, NFT's, and revolutionizing the educational system. In this digital realm, students are treated equally and can nurture their special talents.
+          Meta-kul is a Blockchain-based Web3 project aimed at spreading awareness of blockchain, WEB 3.0, NFT's, and revolutionizing the educational system via Vedic Education. In this digital realm, students are treated equally and can nurture their special talents.
         </Typography>
-      
         <StyledCard>
           <CardContent>
             <StyledCardHeader>Upcoming Events</StyledCardHeader>
-            <Typography variant="body2">
-              <strong>The Blackout Mint</strong><br />
-              1. Minting will be open for pre and public sale.<br />
+            <Typography variant="h3">
+              <strong>The Blackout Mint (Mainnet- Jan 2024)</strong><br />
+             
+            </Typography>
+            <Typography variant='body1'>
+            1. Minting will be open for pre and public sale.<br />
               2. Launching Staking dashboard of NFT's to earn $KULL passively.<br />
               3. Introducing breeding of the NFT's to upgrade your current 3D NFT's.<br />
             </Typography>
           </CardContent>
         </StyledCard>
-        
-
-        
       </StyledContent>
       </StyledBackground>
     </StyledContainer>

@@ -172,7 +172,7 @@ function MyComponent() {
   return (
     <>
     <CustomGrid container>
-    <Grid item xs={12}>
+    <Grid item xs={8}>
       <CustomImageContainer>
       <CustomImage src={winners_nft2} alt="Winner NFT" />
           <CustomImage2 src={winners_nft3} alt="Winner NFT"  />
@@ -199,15 +199,7 @@ function MyComponent() {
         virtual & web3 experience
       </DescriptionText2>
     </Grid>
-    <Grid item xs={12}>
-      <HowItWorksText>What we offer</HowItWorksText>
-      <DescriptionText>
-        7777 Metaverse land, 777 NFTs, and unlimited
-      </DescriptionText>
-      <DescriptionText2 variant="h4">
-        virtual & web3 experience
-      </DescriptionText2>
-    </Grid>
+    
   </Box>
   </>
 

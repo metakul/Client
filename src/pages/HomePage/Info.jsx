@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
+import {Avatar,Box} from '@mui/material';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/system';
@@ -48,6 +48,14 @@ export default function Info() {
   const closeRoadMapPopup = () => {
     setRoadmapPopupOpen(false);
   };
+  const openInsta = () => {
+    window.open("https://www.instagram.com/metakul.nft/", "_blank");
+  };
+  
+  const openLinkedin = () => {
+    window.open("https://www.linkedin.com/in/shubham-kunwar-90ba441ba/", "_blank");
+  };
+  
   return (
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem', marginTop: "40px" }}>
@@ -59,17 +67,29 @@ export default function Info() {
           </div>
           <CustomTextGray variant="subtitle1" fontWeight="bold">
             <CustomTextNouveauMain variant="subtitle1" fontWeight="bold">
-              31/777
+              777
             </CustomTextNouveauMain>
           </CustomTextGray>
         </div>
         <Box style={{ display: 'flex', gap: '1rem' }}>
-        <CustomButton onClick={openRoadMapPopup}>
-            Roadmap
+        <CustomButton  onClick={openRoadMapPopup}>
+           <Typography sx={{color:"yellow"}}>
+             Roadmap
+            </Typography>
           </CustomButton>
           {/* <CustomButton onClick={openTeamPopup}>
             Team
           </CustomButton> */}
+           <CustomButton onClick={openInsta}>
+           <Avatar>
+                        <img src="assets/icons/instagram.svg" />
+                      </Avatar>
+          </CustomButton>
+           <CustomButton onClick={openLinkedin}>
+           <Avatar>
+                        <img src="assets/icons/linkedin.svg" />
+                      </Avatar>
+          </CustomButton>
         </Box>
       </Box>
       <div>
