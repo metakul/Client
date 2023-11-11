@@ -169,6 +169,9 @@ const Topbar = ({
   const openWallet = async () => {
     navigate("/wallet")
   }
+  const handleOpenStaking = async () => {
+    navigate("/staking")
+  }
 
   return (
     <AppBar
@@ -316,7 +319,7 @@ const Topbar = ({
                     <Avatar>
                       <Groups2TwoToneIcon />
                     </Avatar>
-                    <Typography>Referral</Typography>
+                    <Typography onClick={handleOpenStaking}>Earning</Typography>
                   </StyledMenuItem>
                 </Paper>
 

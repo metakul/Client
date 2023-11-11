@@ -22,7 +22,7 @@ export const navConfig = [
       to: "",
     },
     {
-      text: "Introduction",
+      text: "Into the Metaverse",
       icon: null,
       to: "",
     },
@@ -32,32 +32,31 @@ export const navConfig = [
       to: "wallet",
     },
     {
-      text: "NFT Staking",
-      icon: <PieChartOutlined />,
-      to: "Staking",
-    },
-    {
-      text: "Book Laundry",
-      icon: <PieChartOutlined />,
-      to: "Laundry",
-    },
-
-    {
-      text: "Metaverse",
-      icon: null,
-      to: "",
-    },
-    {
-      text: "Metakul Collection",
-      icon: <TodayOutlined />,
-      to: "metakulNFT",
-    },
-    {
-      text: "NFT",
+      text: "Claim NFT",
       icon: <ShoppingCartOutlined />,
       to: "NFT",
     },
+    {
+      text: "Earn With Nft",
+      icon: <PieChartOutlined />,
+      to: "Staking",
+    },
+    // {
+    //   text: "Book Laundry",
+    //   icon: <PieChartOutlined />,
+    //   to: "Laundry",
+    // },
 
+    // {
+    //   text: "Metaverse",
+    //   icon: null,
+    //   to: "",
+    // },
+    // {
+    //   text: "Metakul Collection",
+    //   icon: <TodayOutlined />,
+    //   to: "metakulNFT",
+    // },
     {
       text: "Marketplace",
       icon: <ReceiptLongOutlined />,
