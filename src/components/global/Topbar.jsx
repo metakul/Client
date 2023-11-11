@@ -264,7 +264,7 @@ const Topbar = ({
                 <div className="text-gray font-black text-sm tracking-wide pb-9">
                   Hi {user.email} !
                 </div>
-                {/* {smartWalletAddress && ( */}
+                {smartWalletAddress && (
                 <Typography
                   sx={{
                     position: "relative",
@@ -282,7 +282,7 @@ const Topbar = ({
                   />
                 </Typography>
 
-                {/* )} */}
+                )}
 
                 {/* <Menus onClick={handleClose} disableRipple
                   sx={{
