@@ -18,7 +18,7 @@ import {
   Typography,
 } from '@mui/material';
 
-
+import toast from 'react-hot-toast';
 // project import
 import FirebaseSocial from './FirebaseSocial';
 import AnimateButton from '../../../components/@extended/AnimateButton';
@@ -49,18 +49,23 @@ const AuthLogin = () => {
       // Simulate login response for the example
       const data = { email, password };
       const response = await userLogin(data); // Ensure you use await here
-      console.log(response);
 
       if (response.status === 200) {
         // Redirect to the dashboard page after login
         // Assuming a successful login would return a token
-        navigate("/wallet"); // Import navigate function from your routing library
-        // toast.success(response.data.message); // Import toast function for displaying messages
+        navigate("/wallet");
+
+        // Reload the page if the current route is "/wallet"
+        if (window.location.pathname === "/wallet") {
+          window.location.reload();
+        }
+
+        toast.success("Logged In"); // Import toast function for displaying messages
       }
     } catch (error) {
       console.log(error)
       if (error.response) {
-        // toast.error(error.response.data.error);
+        toast.error("Error Login");
         setError(error.response.data.error);
       } else {
         console.log('Unknown Error');

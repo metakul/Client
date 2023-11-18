@@ -50,13 +50,13 @@ export default function Router() {
                 { path: '', element: <ComingSoon /> },
             ]
         },
-        {
-            path: '/customMintPage', 
-            element:<DashboardLayout />,
-            children:[
-                { path: '', element: <CustomMintPage /> },
-            ]
-        },
+        // {
+        //     path: '/customMintPage', 
+        //     element:<DashboardLayout />,
+        //     children:[
+        //         { path: '', element: <CustomMintPage /> },
+        //     ]
+        // },
         {
             path: '/kyc', 
             element:<DashboardLayout />,
