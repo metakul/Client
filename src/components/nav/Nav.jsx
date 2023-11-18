@@ -41,7 +41,11 @@ export default function Nav({
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const isLoggedIn = useIsLoggedIn();
+  const [isLoggedIn, setIsLoggedIn] = useState(useIsLoggedIn());
+  useEffect(() => {
+    setIsLoggedIn(useIsLoggedIn());
+  }, []); // Run this effect once when the component mounts
+
 
   useEffect(() => {
     if (isSidebarOpen) {
