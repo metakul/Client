@@ -278,7 +278,7 @@ const Topbar = ({
                   variant="body2"
                   color="textSecondary"
                 >
-                  {user.smartWalletAddress.slice(0, 3) + "..." + user.smartWalletAddress.slice(-4)}
+                  {user.smartWalletAddress && user.smartWalletAddress.slice(0, 3) + "..." + user.smartWalletAddress.slice(-4)}
                   <ContentCopyOutlinedIcon
                     onClick={handleCopySmartWalletAddress}
                     sx={iconClickedStyle}

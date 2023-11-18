@@ -14,6 +14,7 @@ const CustomGrid = styled(Grid)`
   flex-direction: column;
   align-items: center;
   margin-top: ${({ theme }) => theme.spacing(6)};
+  background:${({ theme }) => theme.palette.primary.main};
 `;
 
 const CustomImageContainer = styled(Box)`

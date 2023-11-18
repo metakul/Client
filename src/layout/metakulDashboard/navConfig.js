@@ -52,11 +52,11 @@ export const navConfig = [
     //   icon: null,
     //   to: "",
     // },
-    // {
-    //   text: "Metakul Collection",
-    //   icon: <TodayOutlined />,
-    //   to: "metakulNFT",
-    // },
+    {
+      text: "Be a COP",
+      icon: <TodayOutlined />,
+      to: "customMintPage",
+    },
     {
       text: "Marketplace",
       icon: <ReceiptLongOutlined />,

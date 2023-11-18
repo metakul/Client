@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Topbar from "../../components/global/Topbar";
 import navConfig from "./navConfig";
 import Nav from "../../components/nav/Nav";
-import {  useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import useFetchUserByUsername from "../../hooks/fetchUserByJWT";
 const APP_BAR_MOBILE = 64;
 const APP_BAR_DESKTOP = 92;
@@ -26,22 +26,22 @@ const Main = styled("div")(({ theme }) => ({
 }));
 
 export default function DashboardLayout() {
-  
+
   const isNonMobile = useMediaQuery("(min-width: 766px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const user=useFetchUserByUsername()
+  const user = useFetchUserByUsername()
 
   return (
     <>
-          <StyledRoot>
+      <StyledRoot>
 
-      <Topbar
+        <Topbar
           user={user.data}
           isSidebarOpen={isSidebarOpen}
           isNonMobile={isNonMobile}
           setIsSidebarOpen={setIsSidebarOpen}
           drawerWidth="250px"
-      />
+        />
         <Nav
           user={user.data}
           isNonMobile={isNonMobile}
@@ -50,8 +50,15 @@ export default function DashboardLayout() {
           setIsSidebarOpen={() => setIsSidebarOpen(false)}
           navConfig={navConfig}
         />
-        <Main>
-          <Outlet  />
+        <Main style={{
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundAttachment: "fixed",  // Fixed background attachment to keep it fixed while scrolling
+  backgroundRepeat: "no-repeat",
+  paddingLeft:"40px",
+  paddingRight:"40px"
+}}>
+          <Outlet />
         </Main>
       </StyledRoot>
     </>

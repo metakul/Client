@@ -67,7 +67,8 @@ const CustomizedTabs = () => {
       borderRadius: "24px",
       boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Adding a box shadow
       padding: "8px", // Additional custom CSS for padding
-      maxWidth:"800px !important"
+      maxWidth:"800px !important",
+
     }}
   >
 

@@ -8,9 +8,9 @@ import DashboardLayout from './layout/metakulDashboard';
 import AuthPage from "./pages/AuthPage/Login"
 import HomePage from "./pages/HomePage"
 import MintPage from "./pages/NftPage/mintNft"
-import ComingSoon from "./pages/Common/ComingSoon.jsx"
+import ComingSoon from "./pages/Common/ComingSoon"
 import KycPage from "./pages/KycPage/kycPage"
-import { Career } from './pages/CssPages/Career';
+import Career from './pages/CssPages/Career';
 import Laundry from "./pages/Laundry"
 import Profile from "./pages/Profile"
 import ProductsView from './pages/ProductShopping';
@@ -18,7 +18,7 @@ import Register from './pages/AuthPage/Register';
 import Wallet from "./pages/Wallet"
 import CreateOrder from "./pages/CreateOrder"
 import Staking from './pages/Staking';
-
+import CustomMintPage from './pages/CustomMintPage/CustomMintPage';
 export default function Router() {
 
     const routes = useRoutes([
@@ -48,6 +48,13 @@ export default function Router() {
             element:<DashboardLayout />,
             children:[
                 { path: '', element: <ComingSoon /> },
+            ]
+        },
+        {
+            path: '/customMintPage', 
+            element:<DashboardLayout />,
+            children:[
+                { path: '', element: <CustomMintPage /> },
             ]
         },
         {

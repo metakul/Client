@@ -96,7 +96,8 @@ const MintPage = () => {
           <>
             <StyledCardHeader>Claim Your Free NFT</StyledCardHeader>
             <Typography sx={{
-              m:2
+              m:2,
+              color:colors.primary[100]
             }}>
               Enter your password to and claim NFT
             </Typography>

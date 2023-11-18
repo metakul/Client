@@ -8,7 +8,7 @@ import { uploadFileToIPFS, uploadJSONToIPFS } from "../../scripts/pinata.js";
 import './index.css'
 import loadingGif from '../../assets/gif/loading_24.gif';
 
-export const Career = () => {
+ const Career = () => {
     const theme = useTheme()
     const [formParams, updateFormParams] = useState({ name: '', email: '', position: '', linkdin: '', portfolio: '', cover: '', mobile: '', resume: '' });
     const [fileURL, setFileURL] = useState(null);
@@ -235,3 +235,4 @@ export const Career = () => {
         </Container>
     );
 };
+export default Career;
