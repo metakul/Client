@@ -27,15 +27,15 @@ export default function Router() {
             element:<DashboardLayout />,
             children:[
                 { path: '', element: <HomePage /> },
-               { path: '/login',  element:<AuthPage />  },
+            //    { path: '/login',  element:<AuthPage />  },
             ]
         },
 
-        {
-            path: '/register', 
-            element:<Register />,
+        // {
+        //     path: '/register', 
+        //     element:<Register />,
            
-        },
+        // },
         {
             path: '/NFT', 
             element:<DashboardLayout />,

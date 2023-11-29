@@ -29,7 +29,7 @@ export default function DashboardLayout() {
 
   const isNonMobile = useMediaQuery("(min-width: 766px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const user = useFetchUserByUsername()
+  const user = {}
 
   return (
     <>

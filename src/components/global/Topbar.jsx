@@ -39,7 +39,6 @@ import Groups2TwoToneIcon from '@mui/icons-material/Groups2TwoTone';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import useIsLoggedIn from "../../hooks/isUserLogin";
 
-import { userLogout } from "../../utils/apiUrl/apiUrl";
 
 import RedeemTwoToneIcon from '@mui/icons-material/RedeemTwoTone';
 
@@ -155,16 +154,16 @@ const Topbar = ({
     navigate("/profile"); // Replace "/winnings" with the actual route to your "Winnings" page
   };
 
-  const handleLogout = async () => {
-    try {
-      // Call the userLogout function from your API to log the user out on the server side
-      await userLogout();
-      navigate("/");
-      window.location.reload();
-    } catch (error) {
-      // Handle any errors that may occur during the logout process
-    }
-  };
+  // const handleLogout = async () => {
+  //   try {
+  //     // Call the userLogout function from your API to log the user out on the server side
+  //     await userLogout();
+  //     navigate("/");
+  //     window.location.reload();
+  //   } catch (error) {
+  //     // Handle any errors that may occur during the logout process
+  //   }
+  // };
 
   const openWallet = async () => {
     navigate("/wallet")
@@ -218,7 +217,6 @@ const Topbar = ({
               <LightModeOutlined />
             )}
           </IconButton>
-          {isLoggedIn ? (
             <>
             <IconButton onClick={openWallet}>
               <AccountBalanceWalletOutlinedIcon sx={{ fontSize: "25px" }} />
@@ -265,25 +263,10 @@ const Topbar = ({
                 colors={colors}
               >
                 <div className="text-gray font-black text-sm tracking-wide pb-9">
-                  Hi {user.email} !
+                  Hi WEB3 User!
                 </div>
                 {/* {smartWalletAddress && ( */}
-                <Typography
-                  sx={{
-                    position: "relative",
-                    left: "10%",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                  variant="body2"
-                  color="textSecondary"
-                >
-                  {user.smartWalletAddress && user.smartWalletAddress.slice(0, 3) + "..." + user.smartWalletAddress.slice(-4)}
-                  <ContentCopyOutlinedIcon
-                    onClick={handleCopySmartWalletAddress}
-                    sx={iconClickedStyle}
-                  />
-                </Typography>
+            
 
                 {/* )} */}
 
@@ -323,19 +306,18 @@ const Topbar = ({
                   </StyledMenuItem>
                 </Paper>
 
-                <Paper>
+                {/* <Paper>
                   <StyledMenuItem colors={colors} onClick={handleLogout}>
                     <Avatar>
                       <LogoutOutlinedIcon />
                     </Avatar>
                     <Typography>Log Out</Typography>
                   </StyledMenuItem>
-                </Paper>
+                </Paper> */}
               </StyledMenu>
             </div>
           </FlexBetween>
             </>            
-          ) : null}
 
         
         </FlexBetween>

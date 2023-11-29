@@ -41,7 +41,6 @@ export default function Nav({
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const isLoggedIn = useIsLoggedIn();
 
   useEffect(() => {
     if (isSidebarOpen) {
@@ -118,7 +117,6 @@ export default function Nav({
              />
            </FlexBetween>
            <Divider color={colors.secondary[100]} />
-       {isLoggedIn ? (
 
            <List>
              {navConfig.map(({ text, icon, to }) => {
@@ -172,9 +170,7 @@ export default function Nav({
                );
              })}
            </List>
-              ):(
-                renderRegistrationButton()
-               )}
+           
            <Divider color={colors.secondary[100]} />
 
          </Box>
@@ -213,7 +209,6 @@ export default function Nav({
                    />
                  </FlexBetween>
                  <Divider color={colors.secondary[100]} />
-            {isLoggedIn ? (
 
                  <List>
                    {navConfig.map(({ text, icon, to }) => {
@@ -267,10 +262,7 @@ export default function Nav({
                      );
                    })}
                  </List>
-                   ) : (
-                    // User does not have a valid JWT token, display the registration button
-                    renderRegistrationButton()
-                  )}
+                 
            <Divider color={colors.secondary[100]} />
 
                </Box>

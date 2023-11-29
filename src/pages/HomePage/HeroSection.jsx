@@ -17,7 +17,7 @@ import hero6 from "../../assets/images/hero6.svg";
 import percentage from "../../assets/images/percentage.svg";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
-
+import { ConnectWallet } from "@thirdweb-dev/react";
 import useIsLoggedIn from '../../hooks/isUserLogin';
 
 const HeroSection = () => {
@@ -170,24 +170,8 @@ const HeroSection = () => {
           </Typography>
           <div sx={{ flex: "1" }}></div>
           <div>
-          {!isLoggedIn ? (
-        // Render content for not logged-in users
-        <div sx={{ position: "relative" }}>
-          <Button sx={{ background:colors.secondary[800],  borderRadius: "lg", px: 3, py: 2, mt: 3 }}>
-            <Link style={{
-               color:"white"
-            }} to="/login">REGISTER</Link>
-          </Button>
-        </div>
-      ) : (
-        // Render content for logged-in users
-        // You can add content specific to logged-in users here
-        <Button variant="contained" sx={{ borderRadius: "lg", px: 3, py: 2, mt: 3 }}>
-        <Link style={{
-          color:"white"
-        }} to="/nft">Claim Metaverse Land</Link>
-      </Button>
-      )}
+        
+        <ConnectWallet/>
           </div>
 
         </Box>
