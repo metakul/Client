@@ -41,22 +41,22 @@ export const navConfig = [
       icon: <PieChartOutlined />,
       to: "Staking",
     },
-    // {
-    //   text: "Book Laundry",
-    //   icon: <PieChartOutlined />,
-    //   to: "Laundry",
-    // },
+    {
+      text: "Book Laundry",
+      icon: <PieChartOutlined />,
+      to: "Laundry",
+    },
 
-    // {
-    //   text: "Metaverse",
-    //   icon: null,
-    //   to: "",
-    // },
-    // {
-    //   text: "Be a COP",
-    //   icon: <TodayOutlined />,
-    //   to: "customMintPage",
-    // },
+    {
+      text: "Metaverse",
+      icon: null,
+      to: "",
+    },
+    {
+      text: "Be a COP",
+      icon: <TodayOutlined />,
+      to: "customMintPage",
+    },
     {
       text: "Marketplace",
       icon: <ReceiptLongOutlined />,
